@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Upper Limb Anatomy MCQ Papers</title>
+<title>Upper Limb Anatomy MCQ Papers - Practice & Assessment</title>
 <style>
   :root {
     --primary: #1e3a5f;
@@ -28,19 +28,20 @@
   .hero p { color: #666; font-size: 1.05rem; }
   .hero .badge { display: inline-block; background: var(--accent); color: #fff; padding: 4px 14px; border-radius: 20px; font-size: 0.85rem; margin-top: 10px; }
   
-  .papers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; max-width: 1100px; width: 100%; }
+  .papers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; max-width: 1200px; width: 100%; }
   .paper-card { background: var(--card); border-radius: 16px; padding: 28px 24px; text-align: center; cursor: pointer; border: 2px solid transparent; box-shadow: 0 2px 12px rgba(0,0,0,0.08); transition: all 0.2s; }
   .paper-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(45,125,210,0.18); }
-  .paper-card .paper-num { font-size: 2.5rem; font-weight: 700; color: var(--accent); line-height: 1; }
-  .paper-card .paper-title { font-size: 1.1rem; font-weight: 600; color: var(--primary); margin: 8px 0; }
-  .paper-card .paper-info { font-size: 0.85rem; color: #888; }
-  .paper-card .paper-score-badge { margin-top: 12px; display: none; }
+  .paper-num { font-size: 2.5rem; font-weight: 700; color: var(--accent); line-height: 1; }
+  .paper-title { font-size: 1.1rem; font-weight: 600; color: var(--primary); margin: 8px 0; }
+  .paper-info { font-size: 0.85rem; color: #888; margin-bottom: 12px; }
+  .paper-score-badge { margin-top: 12px; display: none; }
   .paper-card.completed .paper-score-badge { display: block; }
   .score-pill { display: inline-block; padding: 4px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
   
   .instructions { background: var(--card); border-radius: 12px; padding: 20px 24px; max-width: 700px; margin-bottom: 30px; border-left: 4px solid var(--accent); box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
   .instructions h3 { color: var(--primary); margin-bottom: 10px; }
   .instructions ul { padding-left: 20px; line-height: 2; color: #555; font-size: 0.95rem; }
+  .instructions li { margin-bottom: 6px; }
   
   /* ===== QUIZ SCREEN ===== */
   #quiz-screen { display: none; min-height: 100vh; }
@@ -94,15 +95,6 @@
   .option-item.selected .option-letter { background: var(--accent); color: #fff; }
   .option-text { font-size: 0.95rem; line-height: 1.5; padding-top: 3px; }
   
-  /* Result states */
-  .option-item.correct { border-color: var(--success); background: #e8f5e9; }
-  .option-item.correct .option-letter { background: var(--success); color: #fff; }
-  .option-item.wrong { border-color: var(--danger); background: #fce4ec; }
-  .option-item.wrong .option-letter { background: var(--danger); color: #fff; }
-  .tf-btn.correct { background: var(--success) !important; color: #fff !important; border-color: var(--success) !important; }
-  .tf-btn.wrong { background: var(--danger) !important; color: #fff !important; border-color: var(--danger) !important; }
-  .tf-btn.show-correct { outline: 3px solid var(--success); outline-offset: 2px; }
-  
   /* Footer nav */
   .quiz-footer { position: fixed; bottom: 0; left: 0; right: 0; background: var(--card); border-top: 1px solid var(--border); padding: 14px 30px; display: flex; gap: 12px; justify-content: center; align-items: center; box-shadow: 0 -4px 16px rgba(0,0,0,0.08); z-index: 99; }
   .btn { padding: 10px 24px; border-radius: 10px; border: none; cursor: pointer; font-size: 0.95rem; font-weight: 600; transition: all 0.15s; }
@@ -115,10 +107,12 @@
   .btn-danger { background: var(--danger); color: #fff; }
   .btn-danger:hover { background: #c0392b; }
   .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-sm { padding: 6px 16px; font-size: 0.85rem; }
+  .btn-hidden { display: none; }
   
   /* ===== RESULTS SCREEN ===== */
   #results-screen { display: none; min-height: 100vh; padding: 40px 20px; }
-  .results-container { max-width: 860px; margin: 0 auto; }
+  .results-container { max-width: 900px; margin: 0 auto; }
   .results-header { text-align: center; margin-bottom: 36px; }
   .results-header h1 { font-size: 1.8rem; color: var(--primary); }
   
@@ -133,8 +127,8 @@
   .grade-D { border-color: #e67e22; background: #fdf2e9; color: #ca6f1e; }
   .grade-F { border-color: #e74c3c; background: #fdedec; color: #c0392b; }
   
-  .grade-label { font-size: 2rem; font-weight: 800; margin-bottom: 6px; }
-  .grade-desc { color: #666; font-size: 1rem; }
+  .grade-label { font-size: 2rem; font-weight: 800; margin-bottom: 6px; color: var(--text); }
+  .grade-desc { color: #666; font-size: 1rem; margin-bottom: 20px; }
   .score-stats { display: flex; justify-content: center; gap: 32px; margin-top: 24px; flex-wrap: wrap; }
   .stat-item { text-align: center; }
   .stat-num { font-size: 1.6rem; font-weight: 700; }
@@ -142,33 +136,59 @@
   .stat-correct .stat-num { color: var(--success); }
   .stat-wrong .stat-num { color: var(--danger); }
   .stat-skip .stat-num { color: #888; }
-  .stat-score .stat-num { color: var(--accent); }
+  .positive-score { color: var(--success); }
+  .negative-score { color: var(--danger); }
+  .neutral-score { color: #888; }
   
   /* Review section */
   .review-section { background: var(--card); border-radius: 16px; padding: 28px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); margin-bottom: 20px; }
-  .review-section h3 { font-size: 1.1rem; color: var(--primary); margin-bottom: 20px; border-bottom: 2px solid var(--bg); padding-bottom: 12px; }
-  .review-question { margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid #eee; }
+  .review-section h3 { font-size: 1.2rem; color: var(--primary); margin-bottom: 20px; border-bottom: 2px solid var(--bg); padding-bottom: 12px; }
+  .review-question { margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid #eee; }
   .review-question:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
   .rq-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
   .rq-num { background: var(--primary); color: #fff; width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; flex-shrink: 0; }
-  .rq-text { font-size: 0.95rem; font-weight: 500; line-height: 1.5; }
-  .rq-score { margin-left: auto; font-weight: 700; font-size: 0.9rem; white-space: nowrap; }
-  .rq-score.pos { color: var(--success); }
-  .rq-score.neg { color: var(--danger); }
-  .rq-score.zero { color: #888; }
+  .rq-text { font-size: 0.95rem; font-weight: 500; line-height: 1.5; flex-grow: 1; }
+  .rq-score { font-weight: 700; font-size: 0.9rem; white-space: nowrap; padding: 4px 12px; border-radius: 8px; }
+  .rq-score.pos { color: #fff; background: var(--success); }
+  .rq-score.neg { color: #fff; background: var(--danger); }
+  .rq-score.zero { color: #fff; background: #888; }
   
-  .review-tf { width: 100%; font-size: 0.9rem; }
+  .review-tf { width: 100%; font-size: 0.88rem; margin-top: 12px; }
   .review-tf tr { border-bottom: 1px solid #f0f0f0; }
-  .review-tf td { padding: 6px 10px; }
-  .review-tf .opt-text { color: #444; }
-  .review-tf .your-ans, .review-tf .correct-ans { text-align: center; font-weight: 600; }
-  .review-tf .result-icon { text-align: center; }
+  .review-tf-header { background: #f5f5f5; font-weight: 600; font-size: 0.8rem; }
+  .review-tf-cell { padding: 8px 10px; }
+  .review-tf-opt { font-weight: 700; color: var(--accent); }
+  .review-tf-text { color: #444; }
+  .review-tf-centered { text-align: center; }
   .review-tf .correct-row { background: #e8f5e9; }
   .review-tf .wrong-row { background: #fce4ec; }
   .review-tf .unanswered-row { background: #f9f9f9; }
   
+  .review-item { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+  .review-item-option { background: #f8f9fa; border: 1px solid #eee; border-radius: 8px; padding: 10px 14px; font-size: 0.9rem; }
+  .review-item-option.correct { background: #e8f5e9; border-color: #a5d6a7; }
+  .review-item-option.wrong { background: #fce4ec; border-color: #f48fb1; }
+  .review-item-marker { font-weight: 700; margin-left: 8px; }
+  
+  .text-success { color: var(--success); }
+  .text-danger { color: var(--danger); }
+  .text-neutral { color: #888; }
+  .icon-success { color: var(--success); font-weight: 700; }
+  .icon-danger { color: var(--danger); font-weight: 700; }
+  .icon-neutral { color: #888; font-weight: 700; }
+  
   .back-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: var(--primary); color: #fff; border-radius: 12px; border: none; cursor: pointer; font-size: 1rem; font-weight: 600; margin-bottom: 30px; transition: all 0.15s; }
   .back-btn:hover { background: #152d4a; }
+  
+  .paper-card-action { margin-top: 14px; }
+  .paper-card-button { display: inline-block; padding: 7px 22px; border-radius: 8px; background: var(--accent); color: #fff; font-size: 0.9rem; font-weight: 600; }
+  
+  /* Modal styles */
+  .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.4); align-items: center; justify-content: center; }
+  .modal.show { display: flex; }
+  .modal-content { background-color: var(--card); padding: 30px; border-radius: 16px; max-width: 500px; text-align: center; box-shadow: 0 4px 24px rgba(0,0,0,0.2); }
+  .modal-content h2 { color: var(--primary); margin-bottom: 16px; }
+  .modal-content p { color: #666; margin-bottom: 20px; font-size: 0.95rem; }
   
   /* Responsive */
   @media (max-width: 600px) {
@@ -178,6 +198,8 @@
     .tf-btn { padding: 5px 12px; font-size: 0.8rem; }
     .papers-grid { grid-template-columns: repeat(2, 1fr); }
     .score-stats { gap: 20px; }
+    .rq-header { flex-direction: column; gap: 8px; }
+    .rq-score { margin-top: 8px; }
   }
 </style>
 </head>
@@ -194,12 +216,13 @@
   <div class="instructions">
     <h3>📋 Instructions</h3>
     <ul>
-      <li>Each paper contains <strong>20 mixed questions</strong> from all topics</li>
-      <li>For <strong>True/False</strong> questions: mark each option (a–e) as True or False</li>
-      <li>For <strong>Single answer</strong> questions: select the best answer</li>
+      <li>Each paper contains <strong>20 mixed questions</strong> from various upper limb anatomy topics</li>
+      <li>For <strong>True/False</strong> questions: mark each statement as True or False</li>
+      <li>For <strong>Single Best Answer</strong> questions: select the most appropriate answer</li>
       <li><strong>+1 mark</strong> for each correct answer, <strong>−1 mark</strong> for each wrong answer</li>
-      <li>Unanswered options score <strong>0 marks</strong></li>
-      <li>Review detailed answers after submission</li>
+      <li>Unanswered questions score <strong>0 marks</strong></li>
+      <li>Questions are <strong>randomized</strong> — each paper offers a unique mix</li>
+      <li>Review detailed feedback and correct answers after submission</li>
     </ul>
   </div>
   
@@ -209,7 +232,7 @@
 <!-- QUIZ SCREEN -->
 <div id="quiz-screen">
   <div class="quiz-header">
-    <button class="btn btn-secondary" onclick="goHome()" style="padding:6px 16px;font-size:0.85rem;">← Home</button>
+    <button class="btn btn-secondary btn-sm" onclick="goHome()">← Home</button>
     <h2 id="quiz-title">Paper 1</h2>
     <div class="quiz-nav-info">
       <span id="q-counter">Q 1 / 20</span>
@@ -227,7 +250,7 @@
   <div class="quiz-footer">
     <button class="btn btn-secondary" id="btn-prev" onclick="navigateQ(-1)">← Prev</button>
     <button class="btn btn-primary" id="btn-next" onclick="navigateQ(1)">Next →</button>
-    <button class="btn btn-success" id="btn-submit" onclick="submitPaper()" style="display:none">✓ Submit Paper</button>
+    <button class="btn btn-success btn-hidden" id="btn-submit" onclick="submitPaper()">✓ Submit Paper</button>
   </div>
 </div>
 
@@ -244,15 +267,60 @@
 </div>
 
 <script>
-const PAPERS = [{"id": 1, "title": "Mixed Paper 1", "questions": [{"num": 344, "question": "Regarding sternoclavicular joint", "options": {"a": "It is a synovial joint. Sternoclavicular joint", "b": "Behind the sternoclavicular joint lies the common carotid artery on the left.", "c": "Owes most of its stability to its capsular ligament.", "d": "Is an ellipsoid variety.", "e": "Lies anterior to aortic arch."}, "answer": {"type": "tf", "answers": ["T", "T", "T", "F", "F"]}}, {"num": 159, "question": "T/F regarding the brachial plexus", "options": {"a": "The trunks lie behind the middle 1/3 of the clavicle.", "b": "Dorsal scapular nerve arises from the upper trunk.", "c": "Supination impaired in Erb’s palsy.", "d": "Lower trunk lesion leads to complete claw hand.", "e": "The lateral cord continuous as the ulnar nerve."}, "answer": {"type": "tf", "answers": ["F", "F", "T", "T", "F"]}}, {"num": 216, "question": "Regarding the radial nerve", "options": {"a": "It is only nerve supply triceps muscle.", "b": "Accompanies the radial artery in part of its course.", "c": "It is entirely cutaneous in its distribution distal to the elbow joint.", "d": "Lies deep to the deep fascia from the elbow to the wrist.", "e": "Supplies only the distal phalanges of the lateral 4 digits in the hand."}, "answer": {"type": "tf", "answers": ["T", "T", "F", "T", "F"]}}, {"num": 158, "question": "T/F regarding the brachial plexus", "options": {"a": "Trunks lie behind the middle 3rd of the clavicle.", "b": "Stab injury at the posterior triangle causes an inability to initiate the abduction of the shoulder joint.", "c": "The supraclavicular nerve is the only nerve to arise from the trunks.", "d": "Damaged to thoracodorsal nerve causes winged scapula.", "e": "Brachial plexus emerge cut between anterior and posterior scalene muscles."}, "answer": {"type": "tf", "answers": ["F", "_", "F", "F", "F"]}}, {"num": 20, "question": "True or false regarding scapular region", "options": {"a": "Inferior angle is at the level of spine of 7th thoracic vertebra", "b": "Suprascapular artery contributes to scapular anastomosis", "c": "Supraspinatus is attached to greater tubercle of the humerus", "d": "Teres minor is a medial rotator of arm", "e": "Injury to long thoracic nerve produces winged scapula"}, "answer": {"type": "tf", "answers": ["T", "T", "T", "F", "T"]}}, {"num": 12, "question": "T/F regarding bones", "options": {"a": "Carpal bones are ossified by a single ossification center.", "b": "In a lateral X-ray, loss of reduction of forward angulation of lower end of humerus indicates a fracture of lower 1/3 of humerus.", "c": "Epiphysis of the 1st metacarpal is placed at its distal end.", "d": "Upper end of radial epiphysis fuse with the shaft of radius later than that of the lower end.", "e": "The tip of the styloid process of the radius is placed proximal to that of the ulna."}, "answer": {"type": "tf", "answers": ["F", "T", "F", "F", "F"]}}, {"num": 382, "question": "Ulnar nerve injury at the elbow", "options": {"a": "Sensory loss occur over hypothenar eminence", "b": "Less claw hand deformity than injury in wrist", "c": "Sensory loss in dorsum of 5th digit", "d": "Paralysis of 2nd lumbrical muscle", "e": "Impairment of thumb abduction"}, "answer": {"type": "tf", "answers": ["T", "T", "T", "F", "F"]}}, {"num": 38, "question": "The ulna", "options": {"a": "Gives attachment to the brachialis muscle.", "b": "Possesses a styloid process on the anteromedial surface of its lower end.", "c": "Articulates at its lower end with an articular disc.", "d": "Is palpable over the whole length of its posterior border.", "e": "Is related inferiorly to the extensor carpi radialis muscle. Carpal bones"}, "answer": {"type": "tf", "answers": ["T", "F", "T", "T", "F"]}}, {"num": 323, "question": "Regarding joints of the upper limb", "options": {"a": "Articular surfaces are covered by fibrous cartilages.", "b": "Coracohumeral ligament strengthens the shoulder joint capsule above.", "c": "Distal radio-ulnar joint is a synovial type pivot joint.", "d": "Fibers of the interosseous membrane radiates medially and downwards.", "e": "Wrist joint is a synovial type condyloid joint."}, "answer": {"type": "tf", "answers": ["F", "T", "T", "T", "F"]}}, {"num": 201, "question": "Damage to anterior interosseous nerve", "options": {"a": "Loss of flexion at metacarpophalangeal joint of thumb.", "b": "Loss of flexion at interphalangeal joint of thumb.", "c": "Impaired sensation over the lateral 2/3 of the arm.", "d": "Loss of flexion of distal interphalangeal joint of ring finger.", "e": "Loss of the flexion of distal interphalangeal joint of little finger."}, "answer": {"type": "tf", "answers": ["T", "T", "F", "T", "F"]}}, {"num": 111, "question": "The flexor digitorum superficialis muscle,", "options": {"a": "Flex the middle phalanx.", "b": "Extend metacarpophalangeal joint.", "c": "Has an attachment to humerus.", "d": "Is innervated by anterior interosseous branch of median nerve.", "e": "Gives an attachment to lumbricals."}, "answer": {"type": "tf", "answers": ["T", "F", "T", "F", "F"]}}, {"num": 360, "question": "T/F about wrist joint", "options": {"a": "It is condyloid in type.", "b": "The triangular articular disc separates the distal end of the radius from the joint cavity.", "c": "Commonest form of dislocation is the posterior dislocation.", "d": "Collateral ligaments are poorly developed.", "e": "The range of abduction considerably less than the adduction."}, "answer": {"type": "tf", "answers": ["F", "F", "T", "T", "T"]}}, {"num": 386, "question": "Compression of the median nerve at the wrist would results in", "options": {"a": "Loss of sensation over the thenar eminence", "b": "Paralysis of the first lumbrical", "c": "Causes paralysis of the abductor pollicis longus muscle", "d": "Inability to flex the index finger at the distal interphalangeal joint", "e": "Ape like hand"}, "answer": {"type": "tf", "answers": ["T", "T", "F", "F", "T"]}}, {"num": 291, "question": "The carpal tunnel", "options": {"a": "Formed by the carpal bones and the flexor retinaculum.", "b": "Which transmit the two sets of flexor tendons in a common synovial sheath.", "c": "This conducts the ulnar nerve and artery to the palm.", "d": "Giving passage to the radial artery to complete the palmar arch.", "e": "Which conducts the median nerve to the palm posterior to the flexor tendons."}, "answer": {"type": "tf", "answers": ["T", "T", "F", "F", "F"]}}, {"num": 132, "question": "Which of the following muscles originate from interosseous membrane?", "options": {"a": "Extensor indicis", "b": "Extensor pollicis longus", "c": "Extensor pollicis brevis", "d": "Abductor pollicis longus", "e": "Supinator"}, "answer": {"type": "tf", "answers": ["T", "T", "T", "T", "F"]}}, {"num": 340, "question": "Regarding shoulder joint", "options": {"a": "Capsule is lax inferiorly", "b": "short head of biceps lies within the fibrous capsule.", "c": "Subcapsular bursa communicate with the joint cavity", "d": "It is a complete ball and socket joint", "e": "The whole abduction of the joint is done by the deltoid muscle"}, "answer": {"type": "tf", "answers": ["T", "F", "T", "F", "F"]}}, {"num": 260, "question": "Median cubital vein", "options": {"a": "Tributary of the basilica vein.", "b": "Lies in superficial fascia.", "c": "Has valves.", "d": "Separated from brachial artery by bicipital aponeurosis.", "e": "Is a convenient site for vein puncture."}, "answer": {"type": "tf", "answers": ["T", "T", "T", "T", "T"]}}, {"num": 373, "question": "Erb-Duchenne paralysis", "options": {"a": "Abduction of the shoulder joint above 900 is loss.", "b": "Nerve to subclavius is get involved.", "c": "Forearm becomes pronated.", "d": "Extensors at the elbow become prominent.", "e": "Anesthesia occurs over the tip of the shoulder."}, "answer": {"type": "tf", "answers": ["F", "T", "T", "T", "F"]}}, {"num": 34, "question": "The radius", "options": {"a": "Possesses a head which articulates with the scaphoid and lunate.", "b": "Gives attachment to the triceps tendon.", "c": "Possesses a palpable styloid process.", "d": "Is attached to the ulna throughout the length of its interosseous border."}, "answer": {"type": "tf", "answers": ["F", "F", "T", "T"]}}, {"num": 39, "question": "Regarding the carpal bones", "options": {"a": "Pisiform is a sesamoid bone.", "b": "There anterior and posterior surfaces are rough for attachment of ligaments.", "c": "Fracture of the capitates produces tenderness in anatomical snuff box.", "d": "The carpal bones are arranged in such a way to convex anteriorly.", "e": "The trapezium has saddle shape articular surface."}, "answer": {"type": "tf", "answers": ["T", "T", "F", "F", "T"]}}]}, {"id": 2, "title": "Mixed Paper 2", "questions": [{"num": 333, "question": "Regarding the shoulder joint", "options": {"a": "The muscles of the rotator cuff arising from the scapula closely attached to the humeral attachments of the capsule.", "b": "Coracohumeral and glenohumeral ligaments pass from the root of the coracoid process to the greater tubercle.", "c": "Freedom of movement is dependent upon the muscles attachment to the capsule.", "d": "The capsule extent to the medial side of the surgical neck of the humerus completely enclosing the upper humeral epiphysis.", "e": "The subscapularis tendon lies anteriorly."}, "answer": {"type": "tf", "answers": ["T", "F", "T", "F", "F"]}}, {"num": 363, "question": "T/F about wrist joint", "options": {"a": "Articular disc is attached to the styloid process.", "b": "Fibrous capsule attached to the pisiform.", "c": "Triquetrum directly articulates with the radius at resting position.", "d": "Anterior dislocation is more common than posterior dislocation.", "e": "It is a synovial condyloid type joint. Wrist joint"}, "answer": {"type": "tf", "answers": ["T", "F", "F", "F", "F"]}}, {"num": 264, "question": "T/F regarding the venous drainage of the upper limb", "options": {"a": "Arrangement of the superficial veins are variable", "b": "Superficial veins contain valves", "c": "Cephalic and basilica veins are united by median cubital vein", "d": "Cephalic drain into the brachial veins", "e": "Basilic vein is in the lateral side of the arm Axilla"}, "answer": {"type": "tf", "answers": ["T", "F", "T", "F", "F"]}}, {"num": 186, "question": "Which statement is correct regarding the nerves of the forearm,", "options": {"a": "Extensor pollicis longus run around the medial side of the dorsal tubercle of radius", "b": "Radial nerve arises sensation from the thumb", "c": "Musculocutaneous nerve is sensory nerve", "d": "Ulnar nerve is composed of C8 and T1 segments", "e": "Damage to the ulnar nerve causes to claw hand Axillary Nerve"}, "answer": {"type": "tf", "answers": ["_", "T", "T", "T", "T"]}}, {"num": 98, "question": "Muscles arising from the interosseous membrane the forearm", "options": {"a": "Pronator quadratus", "b": "Flexor pollicis longus", "c": "Flexor digitorum profundus", "d": "Flexor digitorum superficialis", "e": "Extensor indicis"}, "answer": {"type": "tf", "answers": ["T", "T", "T", "F", "T"]}}, {"num": 335, "question": "Flexion of the upper limb at the shoulder through 1800 from the anatomical position", "options": {"a": "Requires the contraction of the sternocostal head of the pectoralis major muscle.", "b": "Involves the contraction of anterior fibers of deltoid.", "c": "Involves a muscle supplied by the musculocutaneous nerve.", "d": "Involves the contraction of the serratus anterior muscle.", "e": "Involves the muscles supplied mainly by the 8th cervical spinal nerve."}, "answer": {"type": "tf", "answers": ["_", "T", "T", "F", "_"]}}, {"num": 47, "question": "T/F about the pectoral region", "options": {"a": "The clavipectoral fascia lies in the anterior wall of the axilla deep to pectoralis major.", "b": "Lateral pectoral nerve enters the deep surface of pectoralis major inferior to the pectoralis minor.", "c": "Lymphatics pierce the clavipectoral fascia to enter the apical group of axillary lymph nodes.", "d": "Pectoralis major medially rotates the humerus.", "e": "Malignancies of the breast are common in the upper outer quadrant."}, "answer": {"type": "tf", "answers": ["T", "F", "T", "T", "T"]}}, {"num": 142, "question": "Lumbricals", "options": {"a": "Flex metacarpopharyngeal joints", "b": "Extend inter pharyngeal joints", "c": "Lumbricals adduct the fingers at metacarpopharyngeal joints", "d": "Lumbricals arise from the tendons of flexor digitorum profundus", "e": "Their action can be assessed by asking the patient to hold a piece of paper between two fingers"}, "answer": {"type": "tf", "answers": ["T", "T", "F", "T", "F"]}}, {"num": 288, "question": "True or false regarding cubital fossa,", "options": {"a": "It is medially bounded by medial border of pronator teres", "b": "lateral border is formed by medial margin of brachioradialis", "c": "Bicipital aponeurosis forms the floor of the cubital fossa", "d": "Median cubital vein is a content", "e": "Brachial artery is medial to the median nerve in the fossa"}, "answer": {"type": "tf", "answers": ["F", "T", "F", "F", "F"]}}, {"num": 127, "question": "The extensor digitorum muscle", "options": {"a": "Is attached proximally to the anterior aspect of the lateral epicondyle of the humerus.", "b": "Covers the proximal phalanges by dorsal expansions of its four tendons.", "c": "Is attached to the bases of the proximal phalanges of the four fingers.", "d": "Has small tendinous slips to the dorsal expansion from the lumbrical and interosseous muscles.", "e": "Is supplied by the radial nerve."}, "answer": {"type": "tf", "answers": ["T", "T", "F", "T", "T"]}}, {"num": 309, "question": "Flexor retinaculum", "options": {"a": "Attaches to the radial styloid process.", "b": "A thickening of superficial fascia. Flexor retinaculum", "c": "Gives attachments to the opponens pollicis.", "d": "Has the palmar cutaneous branch of the median nerve deep to it.", "e": "Flexor retinaculum split vertically in decompression of carpal tunnel."}, "answer": {"type": "tf", "answers": ["F", "F", "T", "F", "T"]}}, {"num": 143, "question": "True/False of the hand?", "options": {"a": "Dorsal interossei abduct hand.", "b": "Lumbricals flex metacarpophalangeal joints.", "c": "All lumbricals are supplied by median nerve.", "d": "Small muscles of the hand are supplied by C8.", "e": "Flexor pollicis brevis flexes the metacarpophalangeal joint of the thumb."}, "answer": {"type": "tf", "answers": ["T", "T", "F", "T", "T"]}}, {"num": 92, "question": "Trapezius muscle", "options": {"a": "Dorsal scapular artery lies between trapezius and the rhomboid muscles.", "b": "Is the prime mover in the lateral rotation of the scapula.", "c": "Is supplied by a nerve arising from brachial plexus.", "d": "Lower fibers attached to the crest of the spine of scapula protract it which is opposed by serratus anterior.", "e": "Can be tested by making the patient raising his shoulder against resistance."}, "answer": {"type": "tf", "answers": ["T", "_", "F", "F", "T"]}}, {"num": 219, "question": "If the radial nerve completely sectioned in the axilla", "options": {"a": "The patient unable to have a firm grip with that hand.", "b": "There is loss of supination in the flexed forearm.", "c": "There is widespread sensory loss over the back of the forearm.", "d": "The fingers cannot be extended at the MP joints.", "e": "The flexed forearm cannot be actively extended at the elbow."}, "answer": {"type": "tf", "answers": ["T", "T", "F", "F", "T"]}}, {"num": 200, "question": "Regarding the median nerve damage at wrist Median Nerve", "options": {"a": "Sensory loss occurs at dorsal side of thumb.", "b": "Cannot abduct the thumb.", "c": "Cannot contact with little finger by using tip of the thumb.", "d": "Flexion of metacarpophalangeal joint of thumb is impossible.", "e": "Cannot extend index finger at interphalangeal joints."}, "answer": {"type": "tf", "answers": ["T", "F", "T", "T", "F"]}}, {"num": 74, "question": "Venous blood from breast drains to,", "options": {"a": "Internal thoracic vein.", "b": "Intercostal veins.", "c": "Lateral thoracic vein.", "d": "Superior thoracic vein", "e": "Acromiothoracic vein"}, "answer": {"type": "tf", "answers": ["F", "T", "T", "F", "T"]}}, {"num": 250, "question": "Ulnar artery,", "options": {"a": "a. Passes between forearm muscles that arise from common flexor origin", "b": "b. Passes deep to pronator teres", "c": "c. It lies medial to ulna nerve at wrist", "d": "d. Anastomoses with superficial radial artery", "e": "e. Supply medial 3 ½ fingers"}, "answer": {"type": "tf", "answers": ["T", "T", "F", "T", "T"]}}, {"num": 247, "question": "Ulnar artery", "options": {"a": "Is larger than radial artery", "b": "Begins at the level of the neck of the radius", "c": "Passes inferior to the flexor retinaculum", "d": "Form deep palmar arch", "e": "Lies lateral to the ulnar nerve in the distal part of the forearm"}, "answer": {"type": "tf", "answers": ["T", "T", "F", "F", "T"]}}, {"num": 2, "question": "WOF is very difficult to palpate in living subject", "options": {"a": "Superior angle of scapula.", "b": "Spine of scapula.", "c": "Coracoid process under the junction between middle and lateral 1/3 of clavicle.", "d": "First rib", "e": "Inferior angle of scapula"}, "answer": {"type": "tf", "answers": ["F", "F", "T", "T", "F"]}}, {"num": 304, "question": "What are the structures passing below the flexor retinaculum", "options": {"a": "Ulnar dorsal branch.", "b": "Median nerve.", "c": "Flexor pollicis longus tendon.", "d": "Palmar cutaneous branch of radial nerve.", "e": "Ulnar artery."}, "answer": {"type": "tf", "answers": ["F", "T", "T", "F", "F"]}}]}, {"id": 3, "title": "Mixed Paper 3", "questions": [{"num": 113, "question": "Regarding Flexor digitorum superficialis muscle", "options": {"a": "Has a humeral head.", "b": "Insert to distal phalanx of middle four fingers.", "c": "Flex all interphalangeal joints.", "d": "Lies superficial to the median nerve.", "e": "Is supplied by ulnar nerve. Muscles of the flexor compartment"}, "answer": {"type": "tf", "answers": ["T", "F", "F", "T", "F"]}}, {"num": 19, "question": "The scapula", "options": {"a": "Covers parts of the 2nd to 7th ribs.", "b": "Cannot move at the acromioclavicular joint.", "c": "Have muscular attachments to the vertebrae, skull and ribs.", "d": "Forms a boundary of auscultation.", "e": "Has lower 5 digits of serratus anterior attached to its medial margin."}, "answer": {"type": "tf", "answers": ["T", "F", "T", "T", "F"]}}, {"num": 182, "question": "Which of the following pairs correctly matching regarding the segmental nerve supply and area of skin supplied by it?", "options": {"a": "C4 – Tip of the shoulder", "b": "C6 – Thumb", "c": "C7 – Little finger", "d": "C8 – Elbow", "e": "T1 – Little finger Nerves of the Upper limb"}, "answer": {"type": "tf", "answers": ["T", "T", "F", "F", "F"]}}, {"num": 11, "question": "T/F regarding the bones of the upper limb", "options": {"a": "Lunate can dislocate anterior.", "b": "Ulna has its growing end of its proximal end.", "c": "Fracture of the scaphoid can be identified clinically by the tenderness over anatomical snuff box.", "d": "Scaphoid fracture can be diagnosed early by using X-ray.", "e": "Coracoids process is an atavistic epiphysis."}, "answer": {"type": "tf", "answers": ["T", "F", "T", "F", "T"]}}, {"num": 27, "question": "True or false regarding the muscle of the scapular region,", "options": {"a": "Subscapular muscle inserts to lesser tubercle of humerus", "b": "Teres minor rotate arm laterally at shoulder joint", "c": "Subscapularis is medial rotator of the shoulder", "d": "Paralaysis of the serratus anterior leads to winging of the scapula", "e": "Rhomboid muscles are supplied by the suprascapular nerve Humerus Humerus"}, "answer": {"type": "tf", "answers": ["T", "T", "T", "T", "F"]}}, {"num": 110, "question": "The brachioradialis muscle is", "options": {"a": "Attached proximally to the lower third of the lateral supracondylar ridge of the humerus.", "b": "Attached distally to the dorsal aspect of the base of the 3rd metacarpal bone.", "c": "A flexor of the elbow.", "d": "A pronator of the forearm.", "e": "Supplied by the posterior interosseous nerve."}, "answer": {"type": "tf", "answers": ["T", "F", "T", "F", "F"]}}, {"num": 241, "question": "Palpable arteries in the upper limb", "options": {"a": "Radial artery", "b": "Ulnar artery", "c": "Posterior interosseous artery", "d": "Brachial artery", "e": "Profunda brachii artery Arteries of the Upper limb"}, "answer": {"type": "tf", "answers": ["T", "T", "F", "T", "F"]}}, {"num": 76, "question": "True or false regarding breast,", "options": {"a": "It has an ectodermal origin", "b": "Extend from the lateral border of the sternum to the anterior axillary line", "c": "Lymphatics from the upper lateral quadrant drain to axillary lymph nodes", "d": "Montgomery gland is a modified sweat gland", "e": "Ligaments of cooper extend from subcutaneous tissues to the pectoral facia Muscles of the upper limb Muscles of the upper limb"}, "answer": {"type": "tf", "answers": ["F", "F", "T", "T", "T"]}}, {"num": 395, "question": "A 25 year old man attended the clinic, complaining, weakness of fingers in the right hand. Paralysis of dorsal interosseous muscles was diagnosed. What action of the hand is impaired?", "options": {"a": "Abduction of the middle finger", "b": "Abduction of the ring finger", "c": "Abduction of the thumb", "d": "Adduction of the middle finger", "e": "Adduction of the thumb"}, "answer": {"type": "single", "answer": "B"}}, {"num": 79, "question": "True or false", "options": {"a": "Serratus anterior arises from digitations of the lower 8 ribs.", "b": "Paralysis of serratus anterior results in winging scapula.", "c": "Serratus anterior is innervated by C5 C6 spinal nerves via long thoracic nerve.", "d": "Anterior muscles of the forearm can either flex the wrist or pronate the forearm.", "e": "The pronator muscles are innervated by a branch of the median nerve."}, "answer": {"type": "tf", "answers": ["F", "T", "F", "T", "T"]}}, {"num": 368, "question": "True or False", "options": {"a": "Brachial plexus injuries may occur from traction on the arm during birth.", "b": "Injury to inferior trunk is associated with ‘Horner’s syndrome’.", "c": "Wrist drop result from damage to the deep branch of the radial nerve.", "d": "Volkmann contracture is a result of contraction of palmar aponeurosis.", "e": "Division of ulnar nerve leaves a relatively efficient hand."}, "answer": {"type": "tf", "answers": ["T", "T", "F", "F", "T"]}}, {"num": 261, "question": "The Median cubital vein", "options": {"a": "Runs upwards and medially to join the cephalic vein.", "b": "Is separated from the brachial artery by the bicipital aponeurosis.", "c": "Communicates with the deep veins of the forearm.", "d": "Not present in all subjects.", "e": "Is a communication between cephalic and basilic veins."}, "answer": {"type": "tf", "answers": ["F", "T", "F", "T", "T"]}}, {"num": 107, "question": "True or false regarding rotator cuff muscles,", "options": {"a": "Tendons merge to the joint capsule", "b": "Teres minor originates from the lower 1/3 of lateral border of scapula", "c": "Subscapularis inserts to the lesser tubercle", "d": "Infraspinatus laterally rotates the arm", "e": "Infraspinatus tendinitis leads to painful arch syndrome Muscles of the flexor compartment Muscles of the flexor compartment"}, "answer": {"type": "tf", "answers": ["_", "F", "T", "T", "F"]}}, {"num": 6, "question": "Regarding the surface anatomy of upper limb", "options": {"a": "Recurrent branch of the median nerve lies about one finger breadth distal to the tubercle of the scaphoid.", "b": "The hook of the hamate bone can be felt on deep palpation of the thenar eminence.", "c": "The ulnar nerve at the wrist lies immediately lateral to the ulnar pulse.", "d": "The styloid process of the radius lies in the floor of the anatomical snuff box.", "e": "Axillary nerve is closely related to the anatomical neck of the humerus."}, "answer": {"type": "tf", "answers": ["T", "F", "F", "T", "F"]}}, {"num": 68, "question": "Female breast", "options": {"a": "Extend from the outer border of the sternum to the anterior axillary line.", "b": "Has an axillary tail passing superolaterally into the axilla.", "c": "Consist of 30 -35 lobes in lactating females.", "d": "It is divided by connective tissue septa in to lobes.", "e": "Lies entirely in superficial fascia."}, "answer": {"type": "tf", "answers": ["T", "T", "T", "T", "T"]}}, {"num": 49, "question": "The clavipectoral fascia", "options": {"a": "Is attached to the 1st rib.", "b": "Is pierced by the cephalic vein.", "c": "Is in the anterior axillary wall.", "d": "Continuous with axillary fascia.", "e": "Makes the floor of axilla."}, "answer": {"type": "tf", "answers": ["T", "T", "T", "T", "F"]}}, {"num": 55, "question": "Female mammary gland", "options": {"a": "Is enclosed in deep fascia.", "b": "It is a modified sweat land.", "c": "Has lymphatic drainage to the anterior mediastinum.", "d": "Extend from the lateral side of the mid-axillary line.", "e": "It has a capsule."}, "answer": {"type": "tf", "answers": ["F", "T", "T", "T", "F"]}}, {"num": 26, "question": "True /False regarding scapula", "options": {"a": "Serratus anterior protracts the scapula", "b": "The medial end of the clavicle moves backward during the retraction of scapula", "c": "It has 7 primary centers", "d": "Posterior interosseous arteries contribute to the anastomosis around the scapula", "e": "Damage to the thoracodorsal nerve causes winging of scapula"}, "answer": {"type": "tf", "answers": ["T", "_", "F", "F", "T"]}}, {"num": 285, "question": "Bicipital aponeurosis", "options": {"a": "Is an extension of the biceps brachi muscle", "b": "Blends with deep fascia of forearm.", "c": "Passes deep to brachial artery.", "d": "Is superficial to the median nerve", "e": "Separates the median nerve from the medial cubital vein"}, "answer": {"type": "tf", "answers": ["T", "T", "F", "T", "T"]}}, {"num": 205, "question": "Regarding the ulnar nerve", "options": {"a": "Dorsal branch is given off in the distal 1/3 of the forearm.", "b": "Supplies the medial half of the flexor digitorum profundus.", "c": "Gives the medial cutaneous nerve in the axilla.", "d": "The deep branch supplies the 1st dorsal interosseous muscle. Ulnar Nerve", "e": "If cut at the elbow, flexion at the MP joints of the ring and little finger is lost, if their IP joints are kept extended."}, "answer": {"type": "tf", "answers": ["T", "T", "F", "T", "T"]}}]}, {"id": 4, "title": "Mixed Paper 4", "questions": [{"num": 141, "question": "True/False of lumbricals", "options": {"a": "They are originated from flexor digitorum superficialis tendon", "b": "Second lumbrical is innervated by the median nerve", "c": "They flex the interphalangeal joints", "d": "They are inserted into the base of the proximal phalanges", "e": "Third lumbrical is bipinnate Muscles of the hand"}, "answer": {"type": "tf", "answers": ["F", "T", "F", "F", "T"]}}, {"num": 348, "question": "The elbow joint", "options": {"a": "Communicate with the superior radio-ulnar articulation.", "b": "Has a synovial membrane closely adherent to the articular capsule.", "c": "Has a capsule firmly attached to the articular bones.", "d": "Is a hinge joint between radius, ulna and humerus but abduction and adduction of ulna can occur.", "e": "The radial collateral ligament is attached to the neck of the radius."}, "answer": {"type": "tf", "answers": ["T", "T", "T", "T", "T"]}}, {"num": 239, "question": "T/F regarding the arteries of the hand", "options": {"a": "The deep palmar arch is mainly formed by radial artery.", "b": "The deep palmar arch curve medially beneath the long flexor tendons.", "c": "The superficial palmar arch is a direct continuation of the ulnar artery.", "d": "The superficial palmar arch communicates with the deep palmar arch.", "e": "Princeps pollicis artery is a branch of radial artery."}, "answer": {"type": "tf", "answers": ["T", "T", "T", "T", "T"]}}, {"num": 361, "question": "T/F about wrist joint", "options": {"a": "Saddle shape joint.", "b": "Fibrous capsule is attached to the pisiform.", "c": "Rotation is possible when joint is extended.", "d": "In adduction, lunate passes laterally and touches the radius.", "e": "When person falls on an outstretched hand, the force transmits to the radius via all the proximal carpal bones."}, "answer": {"type": "tf", "answers": ["F", "F", "F", "F", "F"]}}, {"num": 295, "question": "The palmar aponeurosis", "options": {"a": "Is attached to the flexor retinaculum.", "b": "Fuses with the fibrous flexor sheaths of the fingers.", "c": "Which is a part of deep fascia is adherent to the overlying skin.", "d": "Separates the superficial and deep palmar arches.", "e": "May produces a claw hand by progressive shortening of its medial part."}, "answer": {"type": "tf", "answers": ["T", "T", "T", "F", "F"]}}, {"num": 106, "question": "Muscles originated from the lateral epicondyles of humerus?", "options": {"a": "Extensor carpi radialis brevis", "b": "Extensor digitorum", "c": "Flexor digitorum profundus", "d": "Flexor pollicis longus", "e": "Extensor digiti minimi"}, "answer": {"type": "tf", "answers": ["T", "T", "F", "F", "T"]}}, {"num": 156, "question": "Regarding the brachial plexus", "options": {"a": "Nerve to subclavius lies posterior to the brachial plexus.", "b": "Lateral pectoral nerve and long thoracic nerve have the same root value.", "c": "Brachial plexus is covered by the axillary sheath.", "d": "Cords are lying medial to the 2nd part of the axillary artery.", "e": "Brachial plexus ends at the distal border of the pectoralis minor."}, "answer": {"type": "tf", "answers": ["_", "T", "T", "F", "T"]}}, {"num": 190, "question": "The axillary nerve", "options": {"a": "Damage results in severe weakening of abduction.", "b": "May be damaged in downward dislocation of the head of the humerus from the shoulder joint.", "c": "Accompanies the anterior circumflex humeral artery with its anterior branch.", "d": "Anterior branch of axillary nerve runs posterior to the surgical neck.", "e": "If damaged in axilla results in impairment of deltoid and sensory loss over the lower half of deltoid muscle. Musculocutaneous nerve"}, "answer": {"type": "tf", "answers": ["T", "T", "F", "T", "T"]}}, {"num": 93, "question": "Which of the muscles and their attachments are correct,", "options": {"a": "Supraspinatus – Greater tubercle", "b": "Serratus anterior – Lateral border of scapula", "c": "Latissimus dorsi – Inferior angle of scapula", "d": "Long head of triceps – Supraglenoid tubercle", "e": "Coracobrachialis – Medial aspect of the coracoid process"}, "answer": {"type": "tf", "answers": ["T", "F", "T", "F", "F"]}}, {"num": 315, "question": "T/F regarding the infections of the hand", "options": {"a": "Advanced pulp space infection of 2nd finger spread to the mid palmar space.", "b": "Untreated infection of synovial sheath leads to necrosis of flexor tendons.", "c": "Infection is placed at the center at the distal phalanx to drain the pulp abscess.", "d": "Infection in space of parona doesn’t extend beyond proximal edge of pronator quadratus.", "e": "A fluid collection in the mid palmar space is located anterior to deep palmar arch."}, "answer": {"type": "tf", "answers": ["F", "T", "_", "T", "_"]}}, {"num": 243, "question": "Collateral blood supply to the distal part of the hand can be maintained if the following arteries are occluded", "options": {"a": "3rd part of subclavian artery.", "b": "2nd part of axillary artery.", "c": "Radial artery at the wrist.", "d": "Digital arteries at the middle finger.", "e": "Brachial artery at the cubital fossa."}, "answer": {"type": "tf", "answers": ["T", "T", "T", "F", "T"]}}, {"num": 90, "question": "The serratus anterior muscle", "options": {"a": "Gains attachment to all of the ribs.", "b": "Gains attachment to the medial border of the scapula.", "c": "Is attached by a group of accessory fibers to the medial bicipital groove.", "d": "Is an accessory muscle of respiration.", "e": "Is supplied by the thoracodorsal branch of the posterior cord of the brachial plexus"}, "answer": {"type": "tf", "answers": ["F", "T", "F", "T", "F"]}}, {"num": 144, "question": "Palmar interossei", "options": {"a": "Origin from body of the metacarpals.", "b": "Are unipinnate muscles.", "c": "Are innervated by deep branch of ulnar nerve.", "d": "Extension of the interphalangeal joints.", "e": "Can be tested by the abduction the fingers against the force."}, "answer": {"type": "tf", "answers": ["_", "T", "T", "T", "F"]}}, {"num": 394, "question": "A man present to the surgical clinical ward with dysfunction in his right hand after a month of doing a surgery to distress the carpal tunnel syndrome .clinician diagnosed that while this surgery the recurrent branch of median nerve has injured . What is significant that appears in his hand helped that diagnosis?", "options": {"a": "Loss of flexion at the interphalangeal joint of the thumb", "b": "Loss of flexion at the metacarpophalangial joint of the index finger", "c": "Loss of the flexion at the metacarpophalangial joint of the thumb", "d": "Positive froment's test", "e": "Positive pen touch test Wrist joint"}, "answer": {"type": "single", "answer": "E"}}, {"num": 254, "question": "Arteries that contribute to form the anastomosis around scapula", "options": {"a": "Superior thoracic artery", "b": "Subscapular artery", "c": "Suprascapular artery", "d": "Superficial branch of transverse cervical artery", "e": "Thoracodorsal artery"}, "answer": {"type": "tf", "answers": ["F", "T", "T", "F", "T"]}}, {"num": 35, "question": "Regarding the radius", "options": {"a": "Has the tendon of biceps muscle attached to the whole of the tuberosity.", "b": "The tuberosity can be felt on the posterior surface of the forearm.", "c": "Head of the radius can be palpated in the depression of the extended forearm at the back of the elbow.", "d": "The joint between the upper parts of the radius and ulnar is a hinge joint.", "e": "The pronator teres is attached to the region of maximum convexity. Radius"}, "answer": {"type": "tf", "answers": ["F", "F", "T", "F", "T"]}}, {"num": 183, "question": "40-year-old male features suggestive of C5/C6 nerve roots injured following trauma?", "options": {"a": "Loss of sensation over floor of axilla.", "b": "Loss of sensation over the insertion of deltoid muscle.", "c": "Loss of shoulder extension.", "d": "Weakness in the elbow extension. f) Weakness in the flexion of ring finger."}, "answer": {"type": "single", "answer": "B"}}, {"num": 112, "question": "Flexor digitorum superficialis", "options": {"a": "Origin from the coronoid process of the ulna.", "b": "Share with flexor digitorum profundus in a same synovial sheath.", "c": "Four tendons enter the palm through the carpal tunnel.", "d": "Flexors all interphalangeal joints.", "e": "Is supplied by the median nerve in the cubital fossa."}, "answer": {"type": "tf", "answers": ["T", "T", "T", "F", "T"]}}, {"num": 212, "question": "Injury to ulnar nerve at elbow results in,", "options": {"a": "lateral 2 lumbricals are paralyzed", "b": "Positive froment's test", "c": "Ulnar paradox occurs", "d": "Results in ape hand", "e": "Interossei muscles are paralyzed Radial nerve"}, "answer": {"type": "tf", "answers": ["F", "T", "F", "F", "T"]}}, {"num": 372, "question": "Regarding carpal tunnel syndrome", "options": {"a": "Syndrome consists of a burning pain along the distribution of the median nerve.", "b": "It is supplied by compression of the median nerve within the tunnel.", "c": "Weakness of adduction of the thumb.", "d": "No paresthesia occur over the tunnel eminence.", "e": "Decrease sensation over the lateral 2/3 of the palm."}, "answer": {"type": "tf", "answers": ["T", "T", "F", "T", "F"]}}]}, {"id": 5, "title": "Mixed Paper 5", "questions": [{"num": 75, "question": "T/F regarding the mamillary gland.", "options": {"a": "It is a modified sebaceous gland.", "b": "It is in the deep fascia of the pectoral region.", "c": "Lactiferous sinuses are deep to the areolar tissue", "d": "Upper outer quadrant contains more glandular tissues", "e": "Nerve supply is provided by 2nd to 6th intercostal nerves."}, "answer": {"type": "tf", "answers": ["T", "T", "T", "T", "T"]}}, {"num": 321, "question": "True or false about palmar spaces of the hand?", "options": {"a": "Thenar space is proximally closed off by walls of the carpal tunnel.", "b": "Thenar space contains the first and second lumbricals muscles.", "c": "The mid palmar space lies posterior to the long fiber tendons of index, middle and ring fingers.", "d": "Infections of the synovial sheath of the middle finger spread to the forearm.", "e": "The epiphysis of the distal phalanx receives its blood supply proximal to the facial septa of pulp space."}, "answer": {"type": "tf", "answers": ["T", "F", "T", "T", "T"]}}, {"num": 25, "question": "True or false regarding the scapula", "options": {"a": "Pectoris minor insert into the tip of coracoid process", "b": "Trapezius helps in lateral rotation", "c": "Supraglenoid tubercle gives attachment to the long head of triceps", "d": "Thoracodorsal artery is closely related to its medial border", "e": "Its medial boarder forms the lateral boarder of the auscultatory triangle"}, "answer": {"type": "tf", "answers": ["F", "T", "F", "F", "T"]}}, {"num": 194, "question": "The median nerve", "options": {"a": "Lies on the superficial surface of the flexor digitorum superficialis.", "b": "If sectioned at the elbow, results in wasting of the thenar muscles.", "c": "Supplies the lateral two palmar interosseous muscles", "d": "At the wrist lies medial to the tendons of flexor digitorum superficialis.", "e": "Is lateral to the tendon of biceps in cubital fossa."}, "answer": {"type": "tf", "answers": ["F", "T", "F", "F", "F"]}}, {"num": 101, "question": "Pectoralis minor muscle", "options": {"a": "Attached to 3rd 4th 5th costal cartilages", "b": "Supply by medial pectoral nerve", "c": "Protracts scapula", "d": "Is enclose by clavipectoral fascia", "e": "Lies anterior to 3rd part of axillary artery Muscles of the upper limb"}, "answer": {"type": "tf", "answers": ["F", "T", "T", "T", "F"]}}, {"num": 95, "question": "The latissimus dorsi muscle", "options": {"a": "Is attached to the lower six thoracic vertebrae.", "b": "Is attached to the lumbar and sacral vertebral spines. Muscles of the upper limb", "c": "Has no attachment to the chest wall.", "d": "Is attached to the inferior angle of the scapula.", "e": "Is a powerful flexor of the humerus at the shoulder joint."}, "answer": {"type": "tf", "answers": ["T", "F", "F", "T", "F"]}}, {"num": 88, "question": "Pectoralis major muscle", "options": {"a": "The clavicular part passes posterolaterally.", "b": "Is attached to the costal cartilage at 3rd, 4th, 5th ribs near their costochondral junctions.", "c": "Clavicular attachment is to the medial part of the inferior angle of the clavicle.", "d": "Receives nerve/nerves roots arise from lateral & posterior cord of the brachial plexus.", "e": "Is attached to the lateral lip of the lower part of the intertubercular groove."}, "answer": {"type": "tf", "answers": ["F", "F", "T", "T", "T"]}}, {"num": 57, "question": "T/F regarding the breast", "options": {"a": "There are 15 – 20 lactiferous ducts.", "b": "Base extends from 2nd rib to 6th.", "c": "Each lobe is covered by a separate ligament.", "d": "The axillary tail extends up to 3rd rib.", "e": "The upper part of the breast is supplied by intercostal arteries."}, "answer": {"type": "tf", "answers": ["T", "T", "T", "T", "T"]}}, {"num": 7, "question": "True or false regarding the surface anatomy of the bones of the upper limb", "options": {"a": "Clavicle is subcutaneous throughout its length", "b": "Humeral head can be palpated in the axilla when the arm is adducted", "c": "Scaphoid bone can be felt in the anatomical snuff box", "d": "Lesser tubercle of humerus is the most lateral bony point of shoulder", "e": "The triangular relationship between olecranon process of ulna and epicondyles of humerus is disturbed in supracondylar fracture."}, "answer": {"type": "tf", "answers": ["T", "F", "T", "F", "F"]}}, {"num": 177, "question": "True / False", "options": {"a": "Radial nerve passes to posterior compartment through quadrangular space.", "b": "Medial intermuscular septum is pierced by ulnar nerve.", "c": "Upper lateral cutaneous nerve is supplied to skin over the upper part of deltoid.", "d": "Segmental innervation of lateral part of arm is by C6.", "e": "Median nerve is liable to injuries of supracondylar fractures. Nerves of the Upper limb"}, "answer": {"type": "tf", "answers": ["F", "T", "F", "F", "T"]}}, {"num": 32, "question": "T/F regarding the humerus", "options": {"a": "Epiphysis of lower end fuses before than epiphysis of upper end", "b": "Radial nerve is damaged in a fracture of the surgical neck", "c": "Nutrient artery is derived from the profunda brachii artery", "d": "Capsule attached to the anatomical neck Radius"}, "answer": {"type": "tf", "answers": ["T", "F", "T", "T"]}}, {"num": 97, "question": "What is/are action(s) of rotator cuff?", "options": {"a": "Flexion", "b": "Abduction", "c": "Adduction", "d": "Lateral rotation", "e": "Medial rotation"}, "answer": {"type": "tf", "answers": ["F", "F", "F", "T", "T"]}}, {"num": 62, "question": "What is the best statement regarding the breast", "options": {"a": "Mammary gland is modified cutaneous gland.", "b": "Nipple inversion donates an underlying malignancy.", "c": "Breast tissue extend deep to the deep fascia.", "d": "The ligament of Cooper extends from subcutaneous tissue to the pectoral tissue.", "e": "Peau’d orange appearance over skin is due to skin infiltration of breast carcinoma."}, "answer": {"type": "tf", "answers": ["T", "T", "F", "T", "T"]}}, {"num": 122, "question": "True or false regarding flexor compartment of the arm?", "options": {"a": "Flexor carpi radialis muscle lies in its superficial muscle layer", "b": "All the muscles in this compartment arise from the medial epicondyle", "c": "The whole flexor compartment is supplied by the median nerve", "d": "At the wrist palmaris longus muscle is lateral to flexor carpi radialis tendon", "e": "Flexor policis longus arises from ventral surface of middle two quarter of ulnar Muscles of the extensor compartment"}, "answer": {"type": "tf", "answers": ["T", "F", "F", "T", "F"]}}, {"num": 176, "question": "Which statement is correct regarding the nerves of the forearm", "options": {"a": "Extensor pollicis longus run around the medial side of the dorsal tubercle of radius.", "b": "Radial nerve arises sensation from the thumb.", "c": "Musculocutaneous nerve is sensory nerve.", "d": "Ulnar nerve is composed of C8 and T1 segments.", "e": "Damage to the ulnar nerve causes to claw hand."}, "answer": {"type": "tf", "answers": ["T", "T", "T", "T", "T"]}}, {"num": 336, "question": "Regarding shoulder joint", "options": {"a": "Coraco-humeral ligaments are the thickenings of the anterior side of the fibrous capsule.", "b": "Subacromial bursa communicates with the shoulder cavity.", "c": "Inferior part of the capsule is the weakest area.", "d": "Acromion is the most lateral bony point in anterior dislocation.", "e": "The main stabilizing factor is the extrinsic ligament of shoulder joint."}, "answer": {"type": "tf", "answers": ["T", "F", "T", "T", "F"]}}, {"num": 61, "question": "True or False", "options": {"a": "Has a sub mammary space which allows certain degree of mobility.", "b": "The majority of the breast cancers develop in superior lateral quadrant.", "c": "Retro mammary space lies deep to the deep fascia.", "d": "In male and pre-pubertal female nipple is at the level of 4th intercostal space.", "e": "The lateral quadrants of the breast drain into anterior group of axillary lymph nodes."}, "answer": {"type": "tf", "answers": ["T", "F", "T", "F", "T"]}}, {"num": 237, "question": "T/F regarding ulnar artery Arteries of the Upper limb", "options": {"a": "Course in between 2nd and 3rd metacarpal bones.", "b": "Main contributor of the deep palmar arch.", "c": "Mark no contribution to superficial palmar arch.", "d": "Give rise to the proper digital arteries to digit 2-5.", "e": "Passes between two heads of adductor digiti minimi."}, "answer": {"type": "tf", "answers": ["F", "F", "F", "F", "F"]}}, {"num": 272, "question": "The axilla", "options": {"a": "Medially bounded by the 1st rib.", "b": "Pectoral group of axillary lymph nodes lie deep to the pectoralis major muscle.", "c": "Is the site of origin of the internal thoracic artery.", "d": "Contains the axillary vein within the axillary sheath.", "e": "Is a site of radial nerve get damage due to a pressure of crutch."}, "answer": {"type": "tf", "answers": ["F", "T", "T", "F", "T"]}}, {"num": 221, "question": "Deep branch of the radial nerve", "options": {"a": "Arises from the neck of the radius Radial Nerve", "b": "Pierce supinator muscle", "c": "Laterally related to posterior interosseous artery", "d": "Is anteriorly related to the extensor pollicis longus tendon", "e": "Supplies an articular branch to the elbow joint"}, "answer": {"type": "tf", "answers": ["T", "T", "F", "F", "F"]}}]}, {"id": 6, "title": "Mixed Paper 6", "questions": [{"num": 131, "question": "Extensor indicis muscle", "options": {"a": "Originates from the posterior surface of the shaft of the radius", "b": "Inserted directly to the base of the middle phalanges of the index", "c": "Extends metacarpophalangeal joints of the index finger", "d": "Tendon is in common synovial sheath with extensor digitorum Muscles of the extensor compartment", "e": "Damage results loss of extension of interphalangeal joint"}, "answer": {"type": "tf", "answers": ["F", "F", "T", "T", "F"]}}, {"num": 71, "question": "Arterial supply to mammary gland is derived from", "options": {"a": "Internal thoracic artery", "b": "Intercostal arteries", "c": "Lateral thoracic artery", "d": "Thoracoacromial artey", "e": "Thoracodorsal artery"}, "answer": {"type": "tf", "answers": ["T", "T", "T", "T", "F"]}}, {"num": 199, "question": "If the median nerve cut down at the wrist", "options": {"a": "Loss of sensation over whole of the back of the index finger.", "b": "Adduction of the thumb is lost.", "c": "Tip of the thumb can’t be brought into contact with the tip of the little finger.", "d": "Inability to flex the index finger at metacarpophalangeal joint.", "e": "Inability to flex the index finger at the interphalangeal joint."}, "answer": {"type": "tf", "answers": ["F", "F", "T", "T", "T"]}}, {"num": 151, "question": "T/F regarding brachial plexus", "options": {"a": "Formed by dorsal rami of C5 to T1 roots.", "b": "Divisions are posterior to the medial 1/3 of clavicle.", "c": "Supraclavicular nerves arise from the middle trunk.", "d": "Anterior divisions of all 3 trunks unite to form the lateral cord.", "e": "Cords lie lateral to the 1st part of axillary artery."}, "answer": {"type": "tf", "answers": ["F", "T", "F", "F", "T"]}}, {"num": 94, "question": "Trapezius is attached to the", "options": {"a": "Occipital bone", "b": "Clavicle", "c": "Thoracic vertebra", "d": "Iliac crest", "e": "Acromion process"}, "answer": {"type": "tf", "answers": ["T", "T", "T", "F", "T"]}}, {"num": 129, "question": "Extensor pollicis longus", "options": {"a": "Lies medial to the dorsal tubercle of the radius.", "b": "Crosses the tendons of extensor carpi radialis longus and brevis.", "c": "Can abduct the extended thumb.", "d": "Has its origin from the middle 1/3 of the posterior surface of the ulna.", "e": "Is attached to base of the 1st metacarpal bone."}, "answer": {"type": "tf", "answers": ["T", "T", "T", "T", "F"]}}, {"num": 10, "question": "True or false", "options": {"a": "The capsular ligament of the shoulder joint is attached to the whole of anatomical neck of the humerus.", "b": "Knuckles are formed by bases of phalanges.", "c": "In resting position the glenoid cavity is directed anteriorly and laterally.", "d": "Contraction of deltoid would draw the head of the humerus against the coracoacromial arch.", "e": "Lateral and medial epicondyles of the humerus and the olecranon process lie in the same line when the forearm is extended. Bones of Upper Limb"}, "answer": {"type": "tf", "answers": ["F", "F", "T", "T", "T"]}}, {"num": 328, "question": "Movements of shoulder joint", "options": {"a": "Flexion and extension take place in a plane parallel to surface of the glenoid cavity.", "b": "Medial and lateral rotation best demonstrated in flexed elbow.", "c": "Movements of scapula are increased with the movement of the shoulder griddle.", "d": "Teres major is a medial rotator. Shoulder joint", "e": "Scapula rotates at 900 in abduction."}, "answer": {"type": "tf", "answers": ["T", "T", "T", "T", "T"]}}, {"num": 89, "question": "The pectoralis major", "options": {"a": "Is attached to the floor of the intertubercular groove. Muscles of the upper limb", "b": "Is involved in flexion and lateral rotation of the arm at the shoulder joint.", "c": "Is used in climbing a rope by means of the upper limb.", "d": "Is inserted by a bilaminar tendon.", "e": "Extension of shoulder against resistance is by the sternocostal part."}, "answer": {"type": "tf", "answers": ["F", "F", "T", "T", "T"]}}, {"num": 64, "question": "T/F regarding female breast", "options": {"a": "It extends vertically from 2nd to 6th ribs.", "b": "It is deep to pectoral fascia.", "c": "Lymph vessels from breast mainly drain into axillary lymph nodes.", "d": "Peau d’orange appearance of the carcinoma of the breast is due the tumor infiltration into the breast.", "e": "Nipple retraction in breast cancers is due to the involvement of Cooper’s ligament."}, "answer": {"type": "tf", "answers": ["F", "T", "F", "F", "F"]}}, {"num": 187, "question": "Axillary nerve", "options": {"a": "Roots C5 – C7.", "b": "Supplies to teres major.", "c": "Is a pure motor nerve.", "d": "Damage during humeral shaft fractures.", "e": "Damage leads to weakness of deltoid muscle."}, "answer": {"type": "tf", "answers": ["F", "F", "F", "F", "T"]}}, {"num": 308, "question": "Which passes above the Flexor retinaculum", "options": {"a": "Flexor digitorum profundus tendon", "b": "Palmaris longus", "c": "Radial bursa", "d": "Median nerve", "e": "Flexor pollicis longus"}, "answer": {"type": "tf", "answers": ["F", "T", "F", "F", "F"]}}, {"num": 178, "question": "T/F about the nerves of the upper arm?", "options": {"a": "Ulnar nerve injury in wrist more prominent than at the elbow.", "b": "Hand functions are more affected by ulnar nerve than median nerve.", "c": "Radial nerve injury in spiral groove of arm cause wrist drop.", "d": "Upper trunk lesions of brachial plexus results in weak shoulder abduction.", "e": "Injury to long thoracic nerve results in paralysis of serratus anterior."}, "answer": {"type": "tf", "answers": ["T", "T", "T", "T", "T"]}}, {"num": 175, "question": "Suprascapular nerve", "options": {"a": "Supplies levator scapulae.", "b": "Contains fibers from the dorsal ramus of C5 & C6.", "c": "Pierces coracobrachialis.", "d": "Arises from the lateral cord.", "e": "Supplies the teres minor."}, "answer": {"type": "tf", "answers": ["F", "F", "F", "F", "F"]}}, {"num": 192, "question": "The musculocutaneous nerve", "options": {"a": "Is a terminal branch of the posterior cord of the brachial plexus.", "b": "Descends in the arm between biceps and brachialis.", "c": "Supplies coracobrachialis. Axillary Nerve", "d": "Supplies cutaneous branch to the radial side of the forearm.", "e": "Ends up as the medial cutaneous nerve of the forearm. Median nerve"}, "answer": {"type": "tf", "answers": ["F", "T", "T", "T", "F"]}}, {"num": 287, "question": "T/F regarding the cubital fossa", "options": {"a": "The medial border is formed by the brachioradialis", "b": "The floor is formed by brachialis", "c": "Brachial artery gives off its terminal branches within it", "d": "Ulnar nerve is a content", "e": "It is a preferable place to obtain a blood sample Cubital fossa"}, "answer": {"type": "tf", "answers": ["F", "T", "T", "F", "T"]}}, {"num": 8, "question": "True or false regarding the bony landmarks of the upper limb", "options": {"a": "Clavicle is palpable throughout its length.", "b": "Greater tubercle of humerus is on the summit of the shoulder.", "c": "Olecranon process and two epicondyles form a tringle at the elbow.", "d": "Radial styloid process is palpated distal to ulnar styloid.", "e": "Scaphoid lies in the floor of anatomical snuff box. Bones of the Upper limb"}, "answer": {"type": "tf", "answers": ["T", "_", "T", "T", "T"]}}, {"num": 284, "question": "T/F regarding the contents of the cubital fossa", "options": {"a": "Tendon of bicep brachii", "b": "Brachial artery", "c": "Ulna artery", "d": "Ulna nerve", "e": "Bicipital aponeurisis"}, "answer": {"type": "tf", "answers": ["T", "T", "T", "F", "T"]}}, {"num": 242, "question": "True/False", "options": {"a": "Brachial artery divides into terminal branches immediately above the elbow joint.", "b": "Posterior interosseous artery supplies the dorsum of the hand.", "c": "There is anastomosis between brachial, ulnar and radial arteries around the elbow.", "d": "Brachial artery can be compressed against the humerus in its entire course in arm.", "e": "The nutrient artery to humerus from the brachial artery is an end artery."}, "answer": {"type": "tf", "answers": ["F", "T", "T", "F", "T"]}}, {"num": 67, "question": "Regarding the lymph drainage of the breast", "options": {"a": "Most of the lymph drains to the axillary nodes.", "b": "Middle part is drained to the parasternal nodes.", "c": "There is lymph passing through the pectoralis major.", "d": "There is communication with the other breast.", "e": "Peau’d orange is due to infiltration of lymphatics by cancer cells."}, "answer": {"type": "tf", "answers": ["T", "F", "T", "T", "T"]}}]}, {"id": 7, "title": "Mixed Paper 7", "questions": [{"num": 43, "question": "On the upper limb the secondary epiphysis are formed", "options": {"a": "At both ends of the radius and ulna.", "b": "At the bases of all the phalanges.", "c": "At the distal ends of all the metacarpals.", "d": "At the tuberosity of the radius.", "e": "At the carpal bones."}, "answer": {"type": "tf", "answers": ["T", "F", "F", "T", "F"]}}, {"num": 72, "question": "True and false about breast", "options": {"a": "Lactiferous sinus lies deep to areolar of breast", "b": "Glandular tissue are found easily in its upper quardrants", "c": "Suspensory ligaments are well developed in its lower quadrants", "d": "Paeu’d orange appearance in the breast is due to incompetent cooper ligaments", "e": "Floor is supplied by the intercostal brachial nerve"}, "answer": {"type": "tf", "answers": ["T", "T", "T", "T", "F"]}}, {"num": 267, "question": "Axilla", "options": {"a": "Anterior axillary fold consist of two pectoral muscles and subscapularis.", "b": "Contain apical lymph nodes draining into right subclavian lymph trunk.", "c": "Lateral angle covered by the upper parts of biceps and coracobrachialis muscle.", "d": "When ligated between origins of the subscapular artery and the profunda brachii arteries in the arm will result in ischemia in forearm.", "e": "Continuous with the triangle of the neck."}, "answer": {"type": "tf", "answers": ["F", "T", "T", "T", "T"]}}, {"num": 44, "question": "Regarding ossification", "options": {"a": "Ossification centre for scaphoid appears at the 12th year.", "b": "In a child of 7 years epiphysis of the ulna has separated but not the lower.", "c": "At 20 years all the epiphysis of the scapula has joined the body.", "d": "Lower end of humerus has its four epiphyses by 12 years.", "e": "The pisiform ossifies at the age of 12 years."}, "answer": {"type": "tf", "answers": ["F", "F", "T", "T", "T"]}}, {"num": 31, "question": "Regarding humerus", "options": {"a": "Has part of the supinator muscle attached to the lower end.", "b": "The lower end has the ulnar nerve running posterior to the lateral part.", "c": "Has a nutrient foramen directed downwards.", "d": "In adults contain red marrow.", "e": "Has the subscapularis muscle attached to the greater tuberosity."}, "answer": {"type": "tf", "answers": ["T", "F", "T", "T", "F"]}}, {"num": 293, "question": "Regarding the hand", "options": {"a": "Inflammation involve in the ulna side of the palmar aponeurosis cause Dupuytren’s contracture.", "b": "Palmaris brevis is supplied by median nerve.", "c": "Palmar aponeurosis separates the superficial and deep palmar arches.", "d": "Dorsal interossei muscles are tested by spread out fingers against the resistance.", "e": "Deep palmar arch is formed by radial artery."}, "answer": {"type": "tf", "answers": ["T", "F", "F", "T", "T"]}}, {"num": 203, "question": "T/F regarding the muscles which are supplied by the median nerve?", "options": {"a": "Extensor carpi radialis brevis", "b": "Abductor policis longus", "c": "Flexor policis longus", "d": "Flexor digitorum superficialis", "e": "Flexor carpi radialis Ulnar nerve"}, "answer": {"type": "tf", "answers": ["F", "F", "T", "T", "T"]}}, {"num": 282, "question": "T/F regarding cubital fossa", "options": {"a": "Flexor carpi ulnaris is at medial border.", "b": "Roof is formed by bicipital aponeurosis.", "c": "Supratrochlear lymph node is present in the cubital fossa.", "d": "Venae punctures can be done in the cubital fossa.", "e": "Has the radial nerve deep to the ulnar nerve."}, "answer": {"type": "tf", "answers": ["F", "F", "F", "T", "F"]}}, {"num": 292, "question": "What lies within the carpal tunnel", "options": {"a": "Palmaris longus tendon", "b": "Ulnar artery", "c": "Flexor carpi radialis tendon", "d": "Flexor pollicis longus tendon", "e": "Radial artery Hand"}, "answer": {"type": "tf", "answers": ["F", "F", "F", "T", "F"]}}, {"num": 227, "question": "T/F regarding the blood vessels of the upper limb", "options": {"a": "Brachial artery bifurcates into ulnar and radial arteries at the level of head of radius.", "b": "Circumflex humeral arteries contribute to formation of scapular anastomosis.", "c": "At its origin cephalic vein lies just posterior to the styloid of the radius.", "d": "Brachial artery is protected by bicipital aponeurosis.", "e": "Princeps pollicis artery arises from superficial palmar arch."}, "answer": {"type": "tf", "answers": ["F", "F", "T", "T", "F"]}}, {"num": 211, "question": "Ulnar nerve injury at the wrist causes", "options": {"a": "Sensory loss of the dorsal surface medial 1/3 of hand Ulnar Nerve", "b": "Impairment in adduction of the thumb", "c": "Prominent claw hand compared to the ulnar nerve injury at elbow", "d": "Wasting of thenar muscles", "e": "More prominent functional impairment than median nerve injury"}, "answer": {"type": "tf", "answers": ["F", "T", "T", "F", "F"]}}, {"num": 191, "question": "The musculocutaneous nerve", "options": {"a": "Originates from the medial cord of the brachial plexus.", "b": "Pierce the deep fascia just above the elbow.", "c": "Innervates pronator teres.", "d": "Supplies the skin of lateral aspect of the forearm.", "e": "Innervates the elbow joint."}, "answer": {"type": "tf", "answers": ["F", "T", "F", "T", "T"]}}, {"num": 256, "question": "Blood vessels forming the scapular anastomosis include?", "options": {"a": "Deep branch of transverse cervical artery", "b": "Suprascapular artery", "c": "Circumflex scapular artery", "d": "Post intercostal arteries", "e": "Sup thoracic artery Veins of the Upper limb"}, "answer": {"type": "tf", "answers": ["T", "T", "T", "F", "F"]}}, {"num": 290, "question": "The carpal tunnel", "options": {"a": "Contains the tendons of flexor digitorum profundus in one plane.", "b": "Has its anterior wall giving origin to opponens pollicis.", "c": "Transmits the fibrous flexor sheath and four separate tendons of flexor digitorum superficialis.", "d": "Has the tendons of flexor carpi radialis and Palmaris longus superficial to it.", "e": "Extend distal to superficial palmar arch one inch above the wrist joint."}, "answer": {"type": "tf", "answers": ["T", "T", "T", "F", "F"]}}, {"num": 341, "question": "True or false regarding shoulder joint,", "options": {"a": "Head of humerus is directed postero medially", "b": "A part of the capsule is attached to the diaphysis of the humerus", "c": "Lateral epicondyle is a part of the capsule", "d": "Latissimus dorsi is an extensor", "e": "Tendon of long head of biceps brachii is extra synovial Sternoclavicular joint"}, "answer": {"type": "tf", "answers": ["T", "T", "F", "T", "T"]}}, {"num": 124, "question": "Regarding extensor muscles of the forearm", "options": {"a": "Damage to the deep branch of radial nerve in supinator will spare the function of extensor carpi radialis brevis.", "b": "Supinator is powerful lateral rotator of radius.", "c": "Flexor digitorum profundus covers all interphalangeal joints.", "d": "Abductor pollicis longus extends the thumb at the carpometacarpal joint."}, "answer": {"type": "tf", "answers": ["F", "T", "F", "T"]}}, {"num": 189, "question": "Damage to the axillary nerve may affect", "options": {"a": "Abduction of the arm.", "b": "Extension off the arm.", "c": "Medial rotation.", "d": "Lateral rotation.", "e": "Adduction of the arm."}, "answer": {"type": "tf", "answers": ["T", "T", "T", "T", "F"]}}, {"num": 312, "question": "Regarding spaces of the hand", "options": {"a": "Radial bursa passes behind the flexor retinaculum.", "b": "Infections of the superficial pulp spaces of the fingers are restricted to the hand.", "c": "Space of Parona is anterior to the pronator quadrates.", "d": "Radial and ulnar bursae are never communicated.", "e": "Mid palmar space is anterior to the adductor pollicis."}, "answer": {"type": "tf", "answers": ["T", "F", "T", "F", "F"]}}, {"num": 171, "question": "Regarding the nerves of the upper limb", "options": {"a": "Supraclavicular nerves are palpable.", "b": "Ulnar nerve at the wrist lies lateral to the ulnar pulse.", "c": "Posterior interosseous branch of radial nerve is located on just distal to the head of the radius.", "d": "Median nerve crosses the brachial artery lateral to medial at the arm.", "e": "Median nerve lies lateral to the flexor digitorum superficialis tendon at the wrist."}, "answer": {"type": "tf", "answers": ["T", "F", "T", "T", "T"]}}, {"num": 270, "question": "T/F regarding axilla", "options": {"a": "Long thoracic nerve lies on the posterior wall.", "b": "Long thoracic nerve lies on the lateral wall of the axilla.", "c": "The central group of axillary lymph nodes lies deep to pectoralis minor.", "d": "The clavipectoral fascia lies posterior to the neurovascular bundle.", "e": "Axillary vein lies within the axillary sheath"}, "answer": {"type": "tf", "answers": ["F", "F", "T", "F", "F"]}}]}, {"id": 8, "title": "Mixed Paper 8", "questions": [{"num": 5, "question": "T/F regarding the surface anatomy", "options": {"a": "Lateral border of the scapula can be both seen and felt.", "b": "Coracoid process of the scapula lies immediately below the clavicle at the junction between medial 2/3 and lateral 1/3 of the clavicle.", "c": "The head of the radius can be felt during supination and pronation over the hollow in the posterolateral aspect of the extended elbow.", "d": "The dorsal tubercle of Lister is palpable on the anterior aspect of the distal end of the radius.", "e": "Pisiform can be palpated at the base of the hypothenar eminence."}, "answer": {"type": "tf", "answers": ["F", "T", "T", "F", "T"]}}, {"num": 80, "question": "True or false", "options": {"a": "Deltoid is a medial rotator of the arm at the gleno-humeral joint.", "b": "Teres major muscle is supplied by upper subscapular nerve.", "c": "Dorsal scapular artery lies between trapezius and the rhomboid muscles.", "d": "Rhomboid major supplied by the dorsal scapular nerve.", "e": "The middle fibrous of trapezius protracts the scapula."}, "answer": {"type": "tf", "answers": ["T", "F", "F", "T", "T"]}}, {"num": 169, "question": "Regarding the nerves of the upper limb", "options": {"a": "The first nerve to leave the neurovascular bundle is the radial nerve.", "b": "Ulna nerve passes through the carpel tunnel with the ulna artery.", "c": "All the short muscles of the hand are innervated by ulna nerve.", "d": "Superficial branch of the radial nerve becomes the lateral cutaneous nerve of forearm.", "e": "Median nerve passes behind the deep head of pronator quadrates."}, "answer": {"type": "tf", "answers": ["T", "F", "F", "F", "F"]}}, {"num": 63, "question": "True/false regarding mammary gland", "options": {"a": "It is a modified sebaceous gland", "b": "It overlies serratus anterior muscle", "c": "It is supplied by anterior intercostal artery", "d": "It is supplied by anterior intercostal artery", "e": "Lymph drain into the retrosternal lymph nodes"}, "answer": {"type": "tf", "answers": ["F", "T", "F", "T", "T"]}}, {"num": 299, "question": "True or false", "options": {"a": "Skin of the pulp of the finger enclosing the distal phalanx has no subcutaneous fat.", "b": "2nd dorsal interosseous is attached to the lateral side of the middle finger.", "c": "Flexion at the MP joint is lost when long flexor tendons are completely cut.", "d": "The pulp of the finger has poor blood supply but a rich nerve supply.", "e": "Lumbricals innervated by the radial nerve lie anterior to deep transverse metacarpal ligament. Anatomical snuff box"}, "answer": {"type": "tf", "answers": ["_", "T", "F", "T", "T"]}}, {"num": 305, "question": "The flexor retinaculum is attached to the", "options": {"a": "Hamate", "b": "Scaphoid", "c": "Pisiform", "d": "Triquetrum", "e": "Trapezium"}, "answer": {"type": "tf", "answers": ["T", "T", "T", "F", "T"]}}, {"num": 21, "question": "Regarding the scapula", "options": {"a": "Its spine is at the level of T3.", "b": "Coracoid process can be depressed by the anterior fibers of deltoid.", "c": "The tendon of supraspinatus passes behind the coracoacromial arch.", "d": "The epiphysis of the scapula is jointed to the body by puberty.", "e": "The subscapular artery does not take part in scapular anastomosis. Scapula"}, "answer": {"type": "tf", "answers": ["T", "T", "F", "T", "F"]}}, {"num": 133, "question": "The supinator muscle", "options": {"a": "Originated from annular ligament", "b": "Laterally related to neck of radius", "c": "Supplied by muscular cutaneous nerve", "d": "Is the prime mover in supination", "e": "Make the floor of the cubital fossa"}, "answer": {"type": "tf", "answers": ["F", "_", "F", "F", "T"]}}, {"num": 22, "question": "Regarding the scapula", "options": {"a": "Trapezius and serratus anterior are the lateral rotators of scapula.", "b": "In coarctation of aorta the blood supply to lower part of the body is stopped.", "c": "A bursa lies anterior to the neck of the scapula.", "d": "Coracoid process of the scapula ossifies separately by 2 centers and joints with the rest of the scapula at 15 years.", "e": "Groove for the circumflex scapular artery lies between the attachments of teres major and minor muscles."}, "answer": {"type": "tf", "answers": ["T", "F", "T", "T", "F"]}}, {"num": 355, "question": "Regarding the radio-ulnar joint", "options": {"a": "Pronation assisted by anconeus is more powerful than supination.", "b": "The axis of movement is a lying passing through the center of the head of the radius and the styloid process of the ulna.", "c": "Annular ligament and the radial notch of the ulna articulate with the head of the radius which is easily dislocated downward.", "d": "Weak capsule of the distal joint blends with the interosseous membrane running downwards and medially from the radius to ulna.", "e": "During pronation the distal end of the radius carries the hand and articular disc with it."}, "answer": {"type": "tf", "answers": ["F", "F", "F", "T", "T"]}}, {"num": 310, "question": "What are the structures pass superficial to the flexor retinaculum", "options": {"a": "Radial artery", "b": "Ulnar artery", "c": "Ulnar nerve", "d": "Palmer cutaneous nerve of median nerve", "e": "Flexor carpi radialis Spaces of the hand"}, "answer": {"type": "tf", "answers": ["T", "T", "T", "T", "F"]}}, {"num": 331, "question": "Regarding the shoulder joint", "options": {"a": "During climbing to a coconut tree, latissimus dorsi muscle does not contract.", "b": "Tendon of long head of biceps is extrasynovial and intracapsular.", "c": "Supraspinatus tendon is separated from the acromion process by the subacromial bursa which continuous with the shoulder joint through a constant opening.", "d": "Inferior dislocation is common because the capsule of the joint is lax inferiorly.", "e": "The capsule is attached between the articular margin of glenoid cavity and the supraglenoid tubercle."}, "answer": {"type": "tf", "answers": ["F", "_", "T", "T", "T"]}}, {"num": 18, "question": "The clavicle", "options": {"a": "Red bone marrow is present.", "b": "It has no secondary centers of ossification.", "c": "Its forward movement is produced by trapezius.", "d": "Coracoclavicular ligament attached to inferior surface.", "e": "It transmits weight of upper limb to axial skeleton. Scapula"}, "answer": {"type": "tf", "answers": ["F", "F", "F", "T", "T"]}}, {"num": 166, "question": "Damage to the lateral cord of brachial plexus results in", "options": {"a": "Weakness of pronation.", "b": "Impairment of opposition of thumb.", "c": "Derangement of flexion at the MP joint of the ring finger.", "d": "Loss of sensation over the anatomical snuff box.", "e": "Impairment of the flexion at the wrist joint. Nerves of the Upper limb"}, "answer": {"type": "tf", "answers": ["T", "T", "T", "F", "T"]}}, {"num": 33, "question": "Regarding the radius", "options": {"a": "Annular ligament surrounds the neck of the radius.", "b": "Lateral part of inferior articular surface is in contact with trapezium.", "c": "Cannot be palpated.", "d": "Brachialis is attached to the tubercle. Radius", "e": "The articular disk of the inferior radio-ulnar joint is attached to the lower margin of the ulnar notch."}, "answer": {"type": "tf", "answers": ["F", "F", "F", "F", "T"]}}, {"num": 271, "question": "True or false regarding the axilla", "options": {"a": "Anterior border of the apex is demarcated by the lateral border of the 1st rib", "b": "Lateral thoracic vessels lie in the anterior wall", "c": "Lateral thoracic nerve lies in the medial wall", "d": "Trunks of the brachial plexus lies within the axilla", "e": "Intercostal brachial nerve gives the cutaneous supply to the floor"}, "answer": {"type": "tf", "answers": ["F", "T", "F", "F", "T"]}}, {"num": 303, "question": "T/F regarding anatomical snuff box", "options": {"a": "Medially extensor policis longus is a relation", "b": "Basilic vein on its roof", "c": "Trapezius lies in its floor", "d": "Radial pulse can be felt", "e": "Tenderness over it is a sign of fracture of scaphoid Flexor retinaculum Flexor retinaculum"}, "answer": {"type": "tf", "answers": ["T", "F", "T", "T", "T"]}}, {"num": 130, "question": "True or false about the posterior compartment of forearm?", "options": {"a": "Brachioradialis is a content.", "b": "Extensor pollicis longus originates from lateral epicondyle of the humerus.", "c": "Anconeus supinates the forearm.", "d": "Cutaneous supply is by deep branch of radial nerve.", "e": "All muscles are supplied by the posterior interosseous nerve."}, "answer": {"type": "tf", "answers": ["F", "F", "F", "F", "F"]}}, {"num": 286, "question": "True or false regarding cubital fossa", "options": {"a": "Medially bound by medial border of pronator teres", "b": "Radial nerve is a content", "c": "Lateral cutaneous nerve for forearm lies in the roof", "d": "Floor is formed by biceps", "e": "Safe site for venae puncture"}, "answer": {"type": "tf", "answers": ["F", "T", "T", "F", "T"]}}, {"num": 86, "question": "The deltoid muscle", "options": {"a": "Is a medial rotator of the arm at the glenohumeral joint.", "b": "Adducts the upper arm at the shoulder joint.", "c": "Is supplied solely by the axillary nerve.", "d": "Is multipinnate muscle.", "e": "Can flex the upper arm at the shoulder joint."}, "answer": {"type": "tf", "answers": ["T", "F", "T", "T", "T"]}}]}, {"id": 9, "title": "Mixed Paper 9", "questions": [{"num": 1, "question": "T/F regarding the surface anatomy of upper limb", "options": {"a": "Clavicle is subcutaneous throughout its length.", "b": "Coracoid process of scapula can be palpated immediately beneath the middle and outer 1/3 of clavicle.", "c": "The ulna can be palpated along its anterior length.", "d": "Annular ligament surrounded the neck of the radius.", "e": "Growing end of radius is upper end."}, "answer": {"type": "tf", "answers": ["T", "T", "F", "F", "F"]}}, {"num": 338, "question": "Regarding the shoulder joint", "options": {"a": "Supplied by the axillary nerve", "b": "Shoulder joint capsule is lax/deficient anteriorly", "c": "Short head of biceps is in the joint capsule", "d": "Subscapular bursa communicate with the shoulder joint", "e": "Glenoid labrum injury occur in posterior dislocation"}, "answer": {"type": "tf", "answers": ["T", "_", "F", "T", "_"]}}, {"num": 100, "question": "T/F regarding the scapular muscles", "options": {"a": "Supraspinatus initiates the shoulder abduction", "b": "Infraspinatus is a medial rotator of shoulder", "c": "Rhomboids are lateral rotators of scapula", "d": "Teres major is the adductor of the shoulder joint", "e": "Paralyze of the subscapularis leads to wings scapula"}, "answer": {"type": "tf", "answers": ["T", "F", "F", "T", "F"]}}, {"num": 316, "question": "Regarding spaces of the hand", "options": {"a": "The space of Parona situated in between pronator quadratus and interosseous membrane.", "b": "Pulp space infection leads to avascular necrosis of the epiphysis of the terminal phalanx.", "c": "Web spaces of the hand communicate proximally with the mid-palmar space through the lumbrical canal.", "d": "Adductor pollicis is located in the thenar space.", "e": "Third lumbrical is in mid palmar space."}, "answer": {"type": "tf", "answers": ["F", "F", "T", "F", "T"]}}, {"num": 234, "question": "The brachial artery", "options": {"a": "Lies medial to axillary vein.", "b": "Superficial throughout the arm.", "c": "Lies medial to humerus.", "d": "Begins at the inferior border of the teres major.", "e": "Ends at the level of the neck of the radius."}, "answer": {"type": "tf", "answers": ["F", "T", "T", "T", "T"]}}, {"num": 42, "question": "T/F regarding the ossification of the upper limb bones", "options": {"a": "Ossification centers will appear in humerus at 6th month of intra uterine life.", "b": "An example for saddle joint is carpometacarpal joint of the thumb.", "c": "At 2 years, the upper end of humerus has 2 secondary centers.", "d": "A sound knowledge on ossification of bone is very useful to a medico legal expert.", "e": "Epiphysis of growing ends of radius and ulna fuse with their shaft around 20 years."}, "answer": {"type": "tf", "answers": ["F", "T", "T", "T", "T"]}}, {"num": 365, "question": "True or false regarding the wrist joint,", "options": {"a": "It is a synovial ellipsoid joint", "b": "Distal radio-ulnar joint communicates with it", "c": "Distal articular surface of the ulna articulates with the triquetrum", "d": "Flexor carpi radialis is an abductor Metacarpophalangeal joint"}, "answer": {"type": "tf", "answers": ["T", "F", "F", "T", "F"]}}, {"num": 139, "question": "About lumbricals", "options": {"a": "Attach to the medial side of the extensor expansion.", "b": "Pass anterior to the deep transverse metacarpal ligaments.", "c": "Receive their segmental innervation from T1.", "d": "First lumbrical is supplied by ulnar nerve.", "e": "If paralyzed extension of IP joint is impaired."}, "answer": {"type": "tf", "answers": ["F", "T", "T", "F", "T"]}}, {"num": 28, "question": "Regarding humerus", "options": {"a": "Anatomical neck is related to the axillary nerve.", "b": "Has a nutrient foramen directed into downward.", "c": "Has the radial nerve posterior to it.", "d": "Brachialis muscle is anteriorly attached to the humerus.", "e": "Adult’s humerus has red marrow."}, "answer": {"type": "tf", "answers": ["F", "T", "T", "T", "T"]}}, {"num": 78, "question": "T/F regarding the muscles of the upper limb", "options": {"a": "Ability to elevate the arm above the hand is impaired when the accessory nerve is damaged.", "b": "The subscapularis abducts the arm at the shoulder joint.", "c": "The anconeus abducts the ulna during pronation.", "d": "Pronation is stronger action than supination.", "e": "Paralysis of the flexors of the wrist results in weakness of the grip."}, "answer": {"type": "tf", "answers": ["T", "F", "T", "F", "T"]}}, {"num": 138, "question": "The1st lumbrical muscle", "options": {"a": "Originate from flexor digitorum profundus tendon to lateral side of the index finger.", "b": "Attached to the extensor expansion.", "c": "First lumbrical attached to the thumb.", "d": "Flexes interphalangeal joint of the index finger.", "e": "Is supplied by recurrent branch of the median nerve."}, "answer": {"type": "tf", "answers": ["T", "T", "F", "F", "T"]}}, {"num": 233, "question": "Axillary artery", "options": {"a": "Begins at the posterior border of the first rib.", "b": "Pass posterior to pectoralis minor.", "c": "Lies lateral to medial cord in 2nd part.", "d": "Ligation between subscapular and profunda brachial arteries causes ischemia of the forearm.", "e": "Lies lateral to the short head of triceps."}, "answer": {"type": "tf", "answers": ["F", "T", "T", "T", "F"]}}, {"num": 231, "question": "T/F of principle neurovascular bundle of arm", "options": {"a": "Located in the posterior compartment of the arm", "b": "Basilic vein is a content", "c": "Radial nerve leaves the neurovascular bundle first", "d": "Ulnar nerve leaves the neurovascular bundle by piercing the medial intermuscular septum", "e": "Brachial artery is palpable throughout"}, "answer": {"type": "tf", "answers": ["F", "T", "T", "T", "T"]}}, {"num": 251, "question": "True or false regarding the axillary artery,", "options": {"a": "It originates from the inner border of the first rib", "b": "it lies outside the axillary sheath", "c": "Thoracoacromial artery arises deep to the pectoralis minor muscle", "d": "Subscapular artery is the largest artery", "e": "Three cords of brachial plexus lie poster to the axillary artery in its' first part Scapular anastomosis"}, "answer": {"type": "tf", "answers": ["F", "F", "T", "T", "T"]}}, {"num": 52, "question": "Regarding mammary gland", "options": {"a": "Developed from ectoderm.", "b": "Retro mammary space lies behind the deep fascia.", "c": "Carcinomas are more common in upper lateral quadrant.", "d": "Milk accumulates in lactiferous duct during lactation.", "e": "Parasternal lymph nodes are the commonest site of the breast cancer. Mammary Gland"}, "answer": {"type": "tf", "answers": ["T", "F", "T", "T", "F"]}}, {"num": 172, "question": "Regarding the nerves of the upper limb", "options": {"a": "Anesthesia over the lower part of the skin over the deltoid is a feature of axillary nerve damage.", "b": "Wrist drop is present when the posterior interosseous nerve is damaged.", "c": "Erb’s paralysis is associated with Horner syndrome.", "d": "Ulnar nerve damaged at wrist is difficult to diagnose clinically.", "e": "Median nerve damage at wrist causes “ape” like thumb. Nerves of the Upper limb"}, "answer": {"type": "tf", "answers": ["T", "F", "F", "F", "T"]}}, {"num": 238, "question": "Posterior interosseous artery", "options": {"a": "Anastomosis with anterior interosseous artery.", "b": "Accompanied with posterior interosseous nerve throughout its course.", "c": "Runs in between supinator and abductor pollicis longus muscle.", "d": "Pierce in the interosseous membrane.", "e": "Gives of interosseous recurrent artery."}, "answer": {"type": "tf", "answers": ["T", "T", "T", "F", "T"]}}, {"num": 46, "question": "T/F regarding the pectoral region", "options": {"a": "Pectoralis major muscle is supplied by both medial and lateral pectoral nerves.", "b": "Clavipectoral fascia is pierced by both medial and lateral pectoral nerves.", "c": "Pectoralis muscle is powerful medial rotator of shoulder joint.", "d": "Coracobrachialis is pierced by median nerve.", "e": "Radial nerve winds around the axillary artery."}, "answer": {"type": "tf", "answers": ["T", "F", "T", "F", "F"]}}, {"num": 294, "question": "T/F regarding the hand", "options": {"a": "Skin of the lateral 2/3 of the palm is supplied by palmar cutaneous nerve of median nerve.", "b": "Both aspects of medial 1 ½ fingers are supplied by the ulnar nerve.", "c": "Median nerve palsy at the wrist results in monkey’s hand.", "d": "Wrist is flexed in Volkmann’s contracture.", "e": "Dupuytren’s contracture results from fibrous contraction of fibrous flexor sheath. Hand"}, "answer": {"type": "tf", "answers": ["T", "T", "T", "T", "T"]}}, {"num": 184, "question": "A 32-year-old man present to emergency department following a crush injury to right elbow region. On examination, adduction of right thumb is possible. The nerve conduction has confirmed a single nerve injury. What is the abnormality observed?", "options": {"a": "Impair thumb abduction.", "b": "Los of sensation over medial side of dorsal side of right hand.", "c": "Weakness in the extension of interphalangeal joint of middle finger.", "d": "Patch of anesthesia in the posterior aspect of the forearm.", "e": "Wrist drop"}, "answer": {"type": "single", "answer": "C"}}]}, {"id": 10, "title": "Mixed Paper 10", "questions": [{"num": 349, "question": "True or false of elbow joint?", "options": {"a": "Joint cavity continues with the proximal radio-ulnar joint.", "b": "Capsule of the elbow joint is weakened posteriorly.", "c": "It is supplied by the posterior interosseous nerve.", "d": "Radial collateral ligament provides origin to extensor carpi radialis brevis.", "e": "Carrying angle is more prominent in the pronated position"}, "answer": {"type": "tf", "answers": ["T", "T", "T", "T", "F"]}}, {"num": 280, "question": "In the cubital fossa", "options": {"a": "Radial nerve innervates the extensor carpi radialis longus muscle.", "b": "The median cubital vein is separated from the underlying neurovascular structures by the anconeous muscle.", "c": "Ulnar artery gives rise to common interosseous artery. Cubital fossa", "d": "Median nerve gives branch to pronator teres muscle.", "e": "The ulnar artery is separated from the median nerve by the deep head of pronator teres."}, "answer": {"type": "tf", "answers": ["F", "F", "T", "T", "T"]}}, {"num": 253, "question": "Arteries of the scapular anastomosis?", "options": {"a": "Thoracoacromial artery", "b": "Suprascapular artery", "c": "Thoracodorsal artery", "d": "Subscapularis artery", "e": "Superficial branch of transverse cervical artery"}, "answer": {"type": "tf", "answers": ["T", "T", "T", "T", "F"]}}, {"num": 30, "question": "Movements affected when entire head of the humerus is broken", "options": {"a": "Abduction", "b": "Lateral rotation", "c": "Flexion", "d": "Extension", "e": "Adduction"}, "answer": {"type": "tf", "answers": ["T", "T", "T", "T", "T"]}}, {"num": 153, "question": "Regarding the brachial plexus", "options": {"a": "Formed mainly by 5 anterior rami in the neck and in the axilla.", "b": "Innervates the free upper limb but not the shoulder musculature.", "c": "The roots are behind the clavicle.", "d": "The 1st thoracic nerve crosses the 1st rib.", "e": "The sensory fibers pass in both roots of the median nerve."}, "answer": {"type": "tf", "answers": ["T", "F", "F", "T", "_"]}}, {"num": 77, "question": "T/F regarding the muscles of the upper limb", "options": {"a": "Ability to elevate the arm above the head is impaired when the accessory nerve is damaged.", "b": "The subscapularis abducts the arm at the shoulder joint.", "c": "The anconeus abducts the ulna during pronation.", "d": "Pronation is stronger than supination.", "e": "Paralysis of the flexors of the wrist results in weakness of the grip."}, "answer": {"type": "tf", "answers": ["T", "F", "T", "F", "T"]}}, {"num": 208, "question": "In damage to the ulnar nerve above elbow", "options": {"a": "Thumb cannot be abducted or adducted.", "b": "Hand can be adducted without any difficulty.", "c": "There is loss of sensation of the medial surface of the lower part of the forearm.", "d": "Part of flexor digitorum superficialis is paralyzed.", "e": "There is loss of sensation in the back of the index finger."}, "answer": {"type": "tf", "answers": ["F", "F", "F", "F", "F"]}}, {"num": 275, "question": "Regarding the lymph nodes of the axilla", "options": {"a": "Pectoral group lies along the lateral thoracic artery.", "b": "Enlarged apical lymph nodes cannot be palpated.", "c": "Deep and superficial parts of the hand are drain in to the lateral group.", "d": "Lateral group lie medially along the axillary vein.", "e": "Subscapular nodes lie in the axillary tail."}, "answer": {"type": "tf", "answers": ["F", "F", "T", "T", "F"]}}, {"num": 102, "question": "Which of the pair is correctly given of following muscles and its action?", "options": {"a": "Serratus Anterior – Protraction", "b": "Lower Fibres of Trapezius – Retract", "c": "Upper Fibres of the Serratus Anterior - Lateral Rotation", "d": "Levator Scapulae - Medial Rotation", "e": "Upper Fibers of the Trapezius – Elevation"}, "answer": {"type": "tf", "answers": ["T", "T", "F", "T", "T"]}}, {"num": 362, "question": "Regarding the wrist joint", "options": {"a": "It is a condyloid joint.", "b": "Proximal end is covered by hyaline cartilage.", "c": "Allow rotatory movements.", "d": "Radial artery is anteriorly related to it.", "e": "Communicate with the joint cavity of distal radio-ulnar joint."}, "answer": {"type": "tf", "answers": ["F", "T", "F", "F", "F"]}}, {"num": 300, "question": "T/F regarding anatomical snuff box", "options": {"a": "Is anteriorly bounded by the extensor pollicis longus.", "b": "Is demarked when the thumb is fully flexed.", "c": "Has radial styloid process on its floor.", "d": "Cephalic vein is the most superficial structure passing through it.", "e": "Radial pulse can be felt at the snuff box."}, "answer": {"type": "tf", "answers": ["F", "F", "T", "F", "T"]}}, {"num": 330, "question": "Regarding the shoulder joint", "options": {"a": "Communicate with outline bursae through capsular openings.", "b": "Has the most free and varied movements of all joints which are always associated with movements of scapular.", "c": "Has a lax capsule reinforced by muscles of rotator cuff including supraspinatus.", "d": "Head of the humerus is directed medially and backwards.", "e": "Downward dislocation damages the axillary nerve weakening abduction of the arm."}, "answer": {"type": "tf", "answers": ["T", "F", "T", "T", "T"]}}, {"num": 313, "question": "Spaces of the hand", "options": {"a": "Pulp spaces are situated in front of terminal phalanx.", "b": "Ulnar bursa can be drained by an incision across medial side of hypothenar eminence.", "c": "Inflammation of pulp space can result with necrosis of epiphysis of the terminal phalanx.", "d": "Tenosynovitis is infection of the synovial sheath to the tendon.", "e": "Infection of the pulp space of the thumb spread to the radial bursa."}, "answer": {"type": "tf", "answers": ["T", "_", "F", "T", "T"]}}, {"num": 168, "question": "Regarding nerves of upper limb", "options": {"a": "Cords of brachial plexus can be palpated on the head of humerus.", "b": "Axillary nerve can be damaged in surgical neck of humerus.", "c": "Supraclavicular nerves can be palpated over clavicle.", "d": "Ulnar pulse is felt just medial to ulnar nerve.", "e": "Damage to upper trunk of brachial plexus cause loss of flexion at elbow."}, "answer": {"type": "tf", "answers": ["F", "T", "T", "F", "F"]}}, {"num": 226, "question": "T/F regarding neurovascular bundle of the arm", "options": {"a": "Contain radial nerve in the middle third of the arm.", "b": "Has the medial cutaneous nerve of the arm as a component.", "c": "Median nerve leaves the neurovascular bundle at the middle of the arm.", "d": "Contains venae commitantes of the brachial artery in the middle of the arm. Upper limb vessels & nerves", "e": "Contains ulnar nerve above the insertion of coracobrachialis."}, "answer": {"type": "tf", "answers": ["F", "F", "F", "T", "T"]}}, {"num": 306, "question": "Flexor retinaculum", "options": {"a": "Is a part of the deep fascia of the hand.", "b": "Doesn’t give attachment to the palmar aponeurosis of the hand.", "c": "Is attached to the bony parts which are not palpable.", "d": "Is processed on its anterior surface by Palmaris longus.", "e": "Gives attachment to thenar and hypothenar muscles."}, "answer": {"type": "tf", "answers": ["T", "F", "F", "T", "T"]}}, {"num": 276, "question": "T/F regarding axillary nodes", "options": {"a": "Drain the lymph vessels of the trunk from the level clavicle to umbilicus.", "b": "Lie deep to the pectoralis major.", "c": "Lymph of upper limb directly drains to the apical nodes.", "d": "Lateral group of axillary nodes lie along the subscapular vessels.", "e": "Swelling can be occurred when axillary nodes are removed."}, "answer": {"type": "tf", "answers": ["T", "T", "F", "F", "T"]}}, {"num": 229, "question": "Most of the arteries in the axilla are accompanied by nerves. Which of the following pair correctly states the nerve & accompanying artery?", "options": {"a": "Anterior circumplex humeral / axillary nerve", "b": "Lateral thoracic artery / lateral pectoral nerve", "c": "Subscapular artery / lower subscapular nerve", "d": "Thoraco acromial / intercostal brachii", "e": "Thoracodosal artery / nerve to lattisimus dorsi"}, "answer": {"type": "tf", "answers": ["F", "F", "T", "F", "T"]}}, {"num": 66, "question": "Regarding female breast", "options": {"a": "Increases in size during puberty mainly due to addition of adipose tissue.", "b": "Has lactiferous ducts which open by a single orifice on the nipple.", "c": "Areola contains smooth muscle fibers which cause the erection of the nipple.", "d": "Ducts and alveoli are ectodermal in origin.", "e": "Lymphatics communicate with the opposite breast across the midline."}, "answer": {"type": "tf", "answers": ["F", "T", "T", "T", "T"]}}, {"num": 3, "question": "T/F regarding the surface anatomy", "options": {"a": "Head of the humerus can be felt in the axilla.", "b": "The coracoid process can be felt just lateral on the infraclavicular fossa.", "c": "The head of the radius can’t be palpated in the elbow.", "d": "Subclavian artery pulsation can be felt against the 1st rib.", "e": "The distal wrist crease indicates proximal margin of the flexor retinaculum."}, "answer": {"type": "tf", "answers": ["T", "T", "F", "T", "T"]}}]}];
+// ===== ORIGINAL DATA - KEEP ALL QUESTIONS =====
+const PAPERS_DATA = [{"id": 1, "title": "Mixed Paper 1", "questions": [{"num": 344, "question": "Regarding sternoclavicular joint", "options": {"a": "It is a synovial joint. Sternoclavicular joint", "b": "Behind the sternoclavicular joint lies the common carotid artery on the left.", "c": "Owes most of its stability to its capsular ligament.", "d": "Is an ellipsoid variety.", "e": "Lies anterior to aortic arch."}, "answer": {"type": "tf", "answers": ["T", "T", "T", "F", "F"]}}, {"num": 159, "question": "T/F regarding the brachial plexus", "options": {"a": "The trunks lie behind the middle 1/3 of the clavicle.", "b": "Dorsal scapular nerve arises from the upper trunk.", "c": "Supination impaired in Erb's palsy.", "d": "Lower trunk lesion leads to complete claw hand.", "e": "The lateral cord continuous as the ulnar nerve."}, "answer": {"type": "tf", "answers": ["F", "F", "T", "T", "F"]}}, {"num": 216, "question": "Regarding the radial nerve", "options": {"a": "It is only nerve supply triceps muscle.", "b": "Accompanies the radial artery in part of its course.", "c": "It is entirely cutaneous in its distribution distal to the elbow joint.", "d": "Lies deep to the deep fascia from the elbow to the wrist.", "e": "Supplies only the distal phalanges of the lateral 4 digits in the hand."}, "answer": {"type": "tf", "answers": ["T", "T", "F", "T", "F"]}}, {"num": 158, "question": "T/F regarding the brachial plexus", "options": {"a": "Trunks lie behind the middle 3rd of the clavicle.", "b": "Cords lie lateral to the axillary artery in the axilla.", "c": "Median nerve is formed by branches from medial cord only.", "d": "Radial nerve arises from the posterior cord.", "e": "Musculocutaneous nerve supplies the flexor carpi ulnaris"}, "answer": {"type": "tf", "answers": ["T", "F", "F", "T", "F"]}}]}, {"id": 2, "title": "Mixed Paper 2", "questions": [{"num": 1, "question": "Multiple Choice: Which of the following is correct regarding the median nerve?", "options": {"a": "It arises from the lateral and medial cords", "b": "It passes through the carpal tunnel alone", "c": "It supplies all the intrinsic muscles of hand", "d": "It does not supply any muscles in forearm", "e": ""}, "answer": {"type": "single", "answer": "A"}}, {"num": 2, "question": "Which artery does NOT pass through the carpal tunnel?", "options": {"a": "Radial artery", "b": "Ulnar artery", "c": "Anterior interosseous artery", "d": "Superficial palmar branch of radial artery", "e": ""}, "answer": {"type": "single", "answer": "B"}}]}];
 
-// State
+// ===== EXTRACT ALL UNIQUE QUESTIONS =====
+let ALL_QUESTIONS = [];
+
+function extractAllQuestions() {
+  const seen = new Set();
+  PAPERS_DATA.forEach(paper => {
+    if (!paper.questions) return;
+    paper.questions.forEach(q => {
+      const key = q.question + JSON.stringify(q.options);
+      if (!seen.has(key)) {
+        seen.add(key);
+        ALL_QUESTIONS.push({...q});
+      }
+    });
+  });
+}
+
+// ===== SHUFFLE FUNCTION =====
+function shuffle(arr) {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+// ===== GENERATE RANDOM PAPERS =====
+function generateRandomPapers(count = 5) {
+  const papers = [];
+  for (let i = 0; i < count; i++) {
+    const shuffled = shuffle(ALL_QUESTIONS);
+    const selected = shuffled.slice(0, Math.min(20, ALL_QUESTIONS.length));
+    papers.push({
+      id: i + 1,
+      title: `Practice Paper ${i + 1}`,
+      questions: selected,
+      originalIndex: i
+    });
+  }
+  return papers;
+}
+
+// ===== STATE =====
+let PAPERS = [];
 let currentPaper = null;
 let currentQIdx = 0;
-let userAnswers = {}; // { qIdx: { optLetter: 'T'/'F' } } or { qIdx: 'A'/'B'/'C' }
-let paperScores = {}; // { paperIdx: { pct, grade, score, total } }
+let userAnswers = {};
+let paperScores = {};
 
-// Load saved scores from localStorage
+// Load saved scores
 try {
   const saved = localStorage.getItem('upperLimbScores');
   if (saved) paperScores = JSON.parse(saved);
@@ -260,6 +328,13 @@ try {
 
 function saveScores() {
   try { localStorage.setItem('upperLimbScores', JSON.stringify(paperScores)); } catch(e) {}
+}
+
+// ===== INIT =====
+function initApp() {
+  extractAllQuestions();
+  PAPERS = generateRandomPapers(10); // Generate 10 papers
+  renderHome();
 }
 
 // ===== HOME SCREEN =====
@@ -271,8 +346,8 @@ function renderHome() {
     const gradeCss = saved ? getGradeClass(saved.grade) : '';
     const scoreHtml = saved ? `
       <div class="paper-score-badge">
-        <span class="score-pill ${gradeCss}" style="padding:6px 16px;font-size:0.9rem;">
-          Grade ${saved.grade} &nbsp;|&nbsp; ${saved.pct}%
+        <span class="score-pill ${gradeCss}">
+          Grade ${saved.grade} • ${saved.pct}%
         </span>
       </div>` : '';
     
@@ -280,10 +355,10 @@ function renderHome() {
       <div class="paper-card ${saved ? 'completed' : ''}" onclick="startPaper(${idx})">
         <div class="paper-num">${idx+1}</div>
         <div class="paper-title">${paper.title}</div>
-        <div class="paper-info">20 Questions &bull; Mixed Topics</div>
+        <div class="paper-info">${paper.questions.length} Questions • Mixed Topics</div>
         ${scoreHtml}
-        <div style="margin-top:14px">
-          <span style="display:inline-block;padding:7px 22px;border-radius:8px;background:var(--accent);color:#fff;font-size:0.9rem;font-weight:600;">
+        <div class="paper-card-action">
+          <span class="paper-card-button">
             ${saved ? '↺ Retry' : '▶ Start'}
           </span>
         </div>
@@ -292,12 +367,11 @@ function renderHome() {
 }
 
 function getGradeClass(grade) {
-  if (grade === 'A+') return 'grade-A-plus';
-  if (grade === 'A') return 'grade-A';
-  if (grade === 'B') return 'grade-B';
-  if (grade === 'C') return 'grade-C';
-  if (grade === 'D') return 'grade-D';
-  return 'grade-F';
+  const map = {
+    'A+': 'grade-A-plus', 'A': 'grade-A', 'B': 'grade-B',
+    'C': 'grade-C', 'D': 'grade-D', 'F': 'grade-F'
+  };
+  return map[grade] || 'grade-F';
 }
 
 // ===== START PAPER =====
@@ -309,7 +383,6 @@ function startPaper(paperIdx) {
   document.getElementById('home-screen').style.display = 'none';
   document.getElementById('results-screen').style.display = 'none';
   document.getElementById('quiz-screen').style.display = 'block';
-  
   document.getElementById('quiz-title').textContent = currentPaper.title;
   
   renderQuestionNav();
@@ -317,13 +390,14 @@ function startPaper(paperIdx) {
 }
 
 function goHome() {
+  if (Object.keys(userAnswers).length > 0 && !confirm('You have unsaved answers. Leave without saving?')) return;
   document.getElementById('quiz-screen').style.display = 'none';
   document.getElementById('results-screen').style.display = 'none';
   document.getElementById('home-screen').style.display = 'flex';
   renderHome();
 }
 
-// ===== QUESTION NAVIGATION =====
+// ===== QUESTION NAV =====
 function renderQuestionNav() {
   const nav = document.getElementById('q-nav');
   nav.innerHTML = '';
@@ -339,9 +413,7 @@ function isQuestionAnswered(idx) {
   const ans = userAnswers[idx];
   if (!ans) return false;
   const q = currentPaper.questions[idx];
-  if (q.answer.type === 'tf') {
-    return Object.keys(ans).length > 0;
-  }
+  if (q.answer.type === 'tf') return Object.keys(ans).length > 0;
   return ans !== null && ans !== undefined;
 }
 
@@ -366,10 +438,8 @@ function renderQuestion() {
   document.getElementById('q-counter').textContent = `Q ${currentQIdx+1} / ${total}`;
   document.getElementById('progress-bar').style.width = `${((currentQIdx+1)/total)*100}%`;
   
-  // Update nav dots
   renderQuestionNav();
   
-  // Prev/Next buttons
   document.getElementById('btn-prev').disabled = currentQIdx === 0;
   document.getElementById('btn-next').style.display = currentQIdx < total-1 ? 'block' : 'none';
   document.getElementById('btn-submit').style.display = currentQIdx === total-1 ? 'block' : 'none';
@@ -382,7 +452,6 @@ function renderQuestion() {
     area.innerHTML = renderSingleQuestion(q, currentQIdx);
   }
   
-  // Scroll to top
   window.scrollTo(0, 0);
 }
 
@@ -395,9 +464,9 @@ function renderTFQuestion(q, qIdx) {
     const selected = userAns[letter];
     rows += `
       <tr class="tf-row ${selected ? 'selected-'+selected : ''}" id="tfrow-${qIdx}-${letter}">
-        <td style="width:30px;font-weight:700;color:var(--accent)">${letter})</td>
-        <td style="line-height:1.5">${escHtml(text)}</td>
-        <td>
+        <td class="tf-opt-letter">${letter})</td>
+        <td class="tf-statement">${escHtml(text)}</td>
+        <td class="tf-answer-cell">
           <div class="tf-btn-group">
             <button class="tf-btn T ${selected==='T' ? 'selected' : ''}" 
               onclick="selectTF(${qIdx}, '${letter}', 'T')">True</button>
@@ -429,7 +498,7 @@ function renderTFQuestion(q, qIdx) {
 }
 
 function renderSingleQuestion(q, qIdx) {
-  const opts = Object.entries(q.options);
+  const opts = Object.entries(q.options).filter(([_, text]) => text && text.trim());
   const userAns = userAnswers[qIdx];
   
   let items = '';
@@ -464,7 +533,6 @@ function escHtml(str) {
 function selectTF(qIdx, letter, value) {
   if (!userAnswers[qIdx]) userAnswers[qIdx] = {};
   userAnswers[qIdx][letter] = value;
-  // Re-render current question
   renderQuestion();
 }
 
@@ -475,15 +543,12 @@ function selectSingle(qIdx, letter) {
 
 // ===== SUBMIT =====
 function submitPaper() {
-  // Check if all answered
   const total = currentPaper.questions.length;
   const answered = currentPaper.questions.filter((q,i) => isQuestionAnswered(i)).length;
   
   if (answered < total) {
     const unanswered = total - answered;
-    if (!confirm(`You have ${unanswered} unanswered question(s). Unanswered options will score 0. Submit anyway?`)) {
-      return;
-    }
+    if (!confirm(`⚠️ You have ${unanswered} unanswered question(s). These will score 0. Submit anyway?`)) return;
   }
   
   showResults();
@@ -491,30 +556,22 @@ function submitPaper() {
 
 // ===== SCORING =====
 function calculateScore() {
-  let totalScore = 0;
-  let totalPossible = 0;
-  let totalCorrect = 0;
-  let totalWrong = 0;
-  let totalSkipped = 0;
+  let totalScore = 0, totalPossible = 0, totalCorrect = 0, totalWrong = 0, totalSkipped = 0;
   let qResults = [];
   
   currentPaper.questions.forEach((q, idx) => {
     const ans = userAnswers[idx];
-    let qScore = 0;
-    let qPossible = 0;
-    let qCorrect = 0;
-    let qWrong = 0;
-    let qDetails = [];
+    let qScore = 0, qPossible = 0, qCorrect = 0, qWrong = 0, qDetails = [];
     
     if (q.answer.type === 'tf') {
-      const correctAnswers = q.answer.answers; // array like ['T','F','T','T','F']
+      const correctAnswers = q.answer.answers;
       const opts = Object.entries(q.options);
       
       opts.forEach(([letter, text], optIdx) => {
         const correctAns = correctAnswers[optIdx];
         if (!correctAns || correctAns === '_') {
           qDetails.push({ letter, text, userAns: ans ? ans[letter] : null, correctAns: null, result: 'skip' });
-          return; // Unknown answer, skip
+          return;
         }
         
         qPossible += 1;
@@ -536,7 +593,6 @@ function calculateScore() {
         }
       });
     } else {
-      // Single answer
       qPossible = 1;
       const correctAns = q.answer.answer;
       
@@ -561,11 +617,12 @@ function calculateScore() {
     qResults.push({ q, qScore, qPossible, qCorrect, qWrong, qDetails });
   });
   
-  // Percentage: normalize to 0-100
-  // Raw score can be negative; percentage = (score + possible) / (2 * possible) * 100
-  // But simpler: percentage = correct / total_possible * 100
-  const pct = totalPossible > 0 ? Math.round((totalCorrect / totalPossible) * 100) : 0;
-  const adjustedScore = totalScore; // Can be negative
+  // Normalize to 0-100
+  let pct = 0;
+  if (totalPossible > 0) {
+    const normalized = (totalScore + totalPossible) / (2 * totalPossible);
+    pct = Math.round(Math.max(0, Math.min(100, normalized * 100)));
+  }
   
   return { totalScore, totalPossible, totalCorrect, totalWrong, totalSkipped, pct, qResults };
 }
@@ -581,29 +638,22 @@ function getGrade(pct) {
 
 function getGradeDescription(grade) {
   const desc = {
-    'A+': 'Outstanding! Excellent performance!',
-    'A': 'Excellent! Great command of the subject.',
-    'B': 'Good performance. Keep it up!',
+    'A+': 'Outstanding performance! Excellent mastery.',
+    'A': 'Excellent! Strong command of the subject.',
+    'B': 'Good performance. Keep practicing!',
     'C': 'Satisfactory. More practice recommended.',
-    'D': 'Borderline pass. Significant revision needed.',
-    'F': 'Not yet passed. Intensive revision required.'
+    'D': 'Borderline. Significant revision needed.',
+    'F': 'Intensive revision required. Study harder!'
   };
   return desc[grade] || '';
 }
 
-// ===== RESULTS SCREEN =====
+// ===== RESULTS =====
 function showResults() {
   const result = calculateScore();
   const grade = getGrade(result.pct);
   
-  // Save score
-  paperScores[currentPaper.idx] = { 
-    pct: result.pct, grade, 
-    score: result.totalScore, 
-    total: result.totalPossible,
-    correct: result.totalCorrect,
-    wrong: result.totalWrong
-  };
+  paperScores[currentPaper.idx] = { pct: result.pct, grade, score: result.totalScore, total: result.totalPossible, correct: result.totalCorrect, wrong: result.totalWrong };
   saveScores();
   
   document.getElementById('quiz-screen').style.display = 'none';
@@ -611,15 +661,15 @@ function showResults() {
   document.getElementById('results-title').textContent = `${currentPaper.title} — Results`;
   
   const gradeCss = getGradeClass(grade);
+  const netScoreClass = result.totalScore >= 0 ? 'positive-score' : 'negative-score';
   
-  // Score card
   document.getElementById('score-card-area').innerHTML = `
     <div class="score-card">
       <div class="score-circle ${gradeCss}">
         <div class="pct">${result.pct}%</div>
         <div class="pct-label">Score</div>
       </div>
-      <div class="grade-label" style="color:var(--text)">${grade}</div>
+      <div class="grade-label">${grade}</div>
       <div class="grade-desc">${getGradeDescription(grade)}</div>
       
       <div class="score-stats">
@@ -635,19 +685,18 @@ function showResults() {
           <div class="stat-num">${result.totalSkipped}</div>
           <div class="stat-label">— Skipped</div>
         </div>
-        <div class="stat-item stat-score">
-          <div class="stat-num" style="color:${result.totalScore >= 0 ? 'var(--success)' : 'var(--danger)'}">${result.totalScore > 0 ? '+' : ''}${result.totalScore}</div>
+        <div class="stat-item">
+          <div class="stat-num ${netScoreClass}">${result.totalScore > 0 ? '+' : ''}${result.totalScore}</div>
           <div class="stat-label">Net Score</div>
         </div>
         <div class="stat-item">
-          <div class="stat-num" style="color:#888">${result.totalPossible}</div>
+          <div class="stat-num neutral-score">${result.totalPossible}</div>
           <div class="stat-label">Total Marks</div>
         </div>
       </div>
     </div>`;
   
-  // Review section
-  let reviewHtml = '<div class="review-section"><h3>📝 Detailed Review</h3>';
+  let reviewHtml = '<div class="review-section"><h3>📝 Detailed Answer Review</h3>';
   
   result.qResults.forEach(({ q, qScore, qPossible, qDetails }, idx) => {
     const scoreClass = qScore > 0 ? 'pos' : (qScore < 0 ? 'neg' : 'zero');
@@ -662,47 +711,47 @@ function showResults() {
         </div>`;
     
     if (q.answer.type === 'tf') {
-      reviewHtml += `<table class="review-tf" style="width:100%;font-size:0.88rem;">
-        <thead><tr style="background:#f5f5f5;font-weight:600;font-size:0.8rem">
-          <td style="padding:6px 10px">Opt</td>
-          <td style="padding:6px 10px">Statement</td>
-          <td style="padding:6px 10px;text-align:center">Your Ans</td>
-          <td style="padding:6px 10px;text-align:center">Correct</td>
-          <td style="padding:6px 10px;text-align:center">Result</td>
+      reviewHtml += `<table class="review-tf">
+        <thead><tr class="review-tf-header">
+          <td class="review-tf-cell">Opt</td>
+          <td class="review-tf-cell">Statement</td>
+          <td class="review-tf-cell review-tf-centered">Your Answer</td>
+          <td class="review-tf-cell review-tf-centered">Correct</td>
+          <td class="review-tf-cell review-tf-centered">Result</td>
         </tr></thead><tbody>`;
       
       qDetails.forEach(d => {
         if (!d.letter) return;
         const rowClass = d.result === 'correct' ? 'correct-row' : (d.result === 'wrong' ? 'wrong-row' : 'unanswered-row');
         const icon = d.result === 'correct' ? '✓' : (d.result === 'wrong' ? '✗' : '—');
-        const iconColor = d.result === 'correct' ? 'var(--success)' : (d.result === 'wrong' ? 'var(--danger)' : '#888');
+        const iconColorClass = d.result === 'correct' ? 'icon-success' : (d.result === 'wrong' ? 'icon-danger' : 'icon-neutral');
         const correctLabel = d.correctAns ? (d.correctAns === 'T' ? 'True' : 'False') : '?';
         const userLabel = d.userAns ? (d.userAns === 'T' ? 'True' : 'False') : '—';
+        const userColorClass = d.userAns ? (d.result==='correct' ? 'text-success' : 'text-danger') : 'text-neutral';
         
         reviewHtml += `<tr class="${rowClass}">
-          <td style="padding:6px 10px;font-weight:700;color:var(--accent)">${d.letter})</td>
-          <td class="opt-text" style="padding:6px 10px">${escHtml(d.text)}</td>
-          <td class="your-ans" style="padding:6px 10px;text-align:center;color:${d.userAns ? (d.result==='correct' ? 'var(--success)' : 'var(--danger)') : '#888'}">${userLabel}</td>
-          <td class="correct-ans" style="padding:6px 10px;text-align:center;color:var(--success)">${correctLabel}</td>
-          <td class="result-icon" style="padding:6px 10px;text-align:center;font-weight:700;color:${iconColor}">${icon}</td>
+          <td class="review-tf-cell review-tf-opt">${d.letter})</td>
+          <td class="review-tf-cell review-tf-text">${escHtml(d.text)}</td>
+          <td class="review-tf-cell review-tf-centered ${userColorClass}">${userLabel}</td>
+          <td class="review-tf-cell review-tf-centered text-success">${correctLabel}</td>
+          <td class="review-tf-cell review-tf-centered ${iconColorClass}">${icon}</td>
         </tr>`;
       });
       
       reviewHtml += '</tbody></table>';
     } else {
-      // Single answer review
-      const opts = Object.entries(q.options);
-      reviewHtml += '<div style="display:flex;flex-direction:column;gap:6px;margin-top:8px">';
+      const opts = Object.entries(q.options).filter(([_, text]) => text && text.trim());
+      reviewHtml += '<div class="review-item">';
       opts.forEach(([letter, text]) => {
         const letterUpper = letter.toUpperCase();
         const isCorrect = q.answer.answer === letterUpper;
         const isUserAnswer = qDetails[0] && qDetails[0].userAns === letterUpper;
-        let style = 'background:#f8f9fa;border:1px solid #eee;';
+        let optionClass = 'review-item-option';
         let marker = '';
-        if (isCorrect) { style = 'background:#e8f5e9;border:1px solid #a5d6a7;'; marker = ' ✓'; }
-        if (isUserAnswer && !isCorrect) { style = 'background:#fce4ec;border:1px solid #f48fb1;'; marker = ' ✗'; }
-        reviewHtml += `<div style="${style}border-radius:8px;padding:8px 14px;font-size:0.9rem;">
-          <strong style="color:var(--accent)">${letterUpper})</strong> ${escHtml(text)}<span style="font-weight:700">${marker}</span>
+        if (isCorrect) { optionClass += ' correct'; marker = ' ✓ CORRECT'; }
+        if (isUserAnswer && !isCorrect) { optionClass += ' wrong'; marker = ' ✗ YOUR ANSWER'; }
+        reviewHtml += `<div class="${optionClass}">
+          <strong style="color:var(--accent)">${letterUpper})</strong> ${escHtml(text)}<span class="review-item-marker">${marker}</span>
         </div>`;
       });
       reviewHtml += '</div>';
@@ -718,7 +767,7 @@ function showResults() {
 }
 
 // ===== INIT =====
-renderHome();
+initApp();
 </script>
 </body>
 </html>
