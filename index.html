@@ -157,19 +157,51 @@
   .rq-score.neg { color: var(--danger); }
   .rq-score.zero { color: #888; }
   
-  .review-tf { width: 100%; font-size: 0.9rem; }
+  .review-tf { width: 100%; font-size: 0.88rem; }
   .review-tf tr { border-bottom: 1px solid #f0f0f0; }
-  .review-tf td { padding: 6px 10px; }
-  .review-tf .opt-text { color: #444; }
-  .review-tf .your-ans, .review-tf .correct-ans { text-align: center; font-weight: 600; }
-  .review-tf .result-icon { text-align: center; }
   .review-tf .correct-row { background: #e8f5e9; }
   .review-tf .wrong-row { background: #fce4ec; }
   .review-tf .unanswered-row { background: #f9f9f9; }
   
   .back-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: var(--primary); color: #fff; border-radius: 12px; border: none; cursor: pointer; font-size: 1rem; font-weight: 600; margin-bottom: 30px; transition: all 0.15s; }
   .back-btn:hover { background: #152d4a; }
-  
+
+  /* Button variants */
+  .btn-sm { padding: 6px 16px; font-size: 0.85rem; }
+  .btn-hidden { display: none; }
+
+  /* Review section utilities */
+  .review-tf-header { background: #f5f5f5; font-weight: 600; font-size: 0.8rem; }
+  .review-tf-cell { padding: 6px 10px; }
+  .review-tf-opt { font-weight: 700; color: var(--accent); }
+  .review-tf-text { color: #444; }
+  .review-tf-centered { text-align: center; }
+  .review-item { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+  .review-item-option { background: #f8f9fa; border: 1px solid #eee; border-radius: 8px; padding: 8px 14px; font-size: 0.9rem; }
+  .review-item-option.correct { background: #e8f5e9; border: 1px solid #a5d6a7; }
+  .review-item-option.wrong { background: #fce4ec; border: 1px solid #f48fb1; }
+  .review-item-marker { font-weight: 700; }
+
+  .home-btn { padding: 6px 16px; font-size: 0.85rem; }
+
+  .paper-card-action { margin-top: 14px; }
+  .paper-card-button { display: inline-block; padding: 7px 22px; border-radius: 8px; background: var(--accent); color: #fff; font-size: 0.9rem; font-weight: 600; }
+
+  /* Score coloring */
+  .positive-score { color: var(--success); }
+  .negative-score { color: var(--danger); }
+  .neutral-score { color: #888; }
+
+  /* Text color utilities */
+  .text-success { color: var(--success); }
+  .text-danger { color: var(--danger); }
+  .text-neutral { color: #888; }
+
+  /* Icon color utilities */
+  .icon-success { color: var(--success); font-weight: 700; }
+  .icon-danger { color: var(--danger); font-weight: 700; }
+  .icon-neutral { color: #888; font-weight: 700; }
+
   /* Responsive */
   @media (max-width: 600px) {
     .quiz-header { padding: 14px 16px; }
@@ -209,7 +241,7 @@
 <!-- QUIZ SCREEN -->
 <div id="quiz-screen">
   <div class="quiz-header">
-    <button class="btn btn-secondary" onclick="goHome()" style="padding:6px 16px;font-size:0.85rem;">← Home</button>
+    <button class="btn btn-secondary home-btn" onclick="goHome()">← Home</button>
     <h2 id="quiz-title">Paper 1</h2>
     <div class="quiz-nav-info">
       <span id="q-counter">Q 1 / 20</span>
@@ -227,7 +259,7 @@
   <div class="quiz-footer">
     <button class="btn btn-secondary" id="btn-prev" onclick="navigateQ(-1)">← Prev</button>
     <button class="btn btn-primary" id="btn-next" onclick="navigateQ(1)">Next →</button>
-    <button class="btn btn-success" id="btn-submit" onclick="submitPaper()" style="display:none">✓ Submit Paper</button>
+    <button class="btn btn-success btn-hidden" id="btn-submit" onclick="submitPaper()">✓ Submit Paper</button>
   </div>
 </div>
 
@@ -282,8 +314,8 @@ function renderHome() {
         <div class="paper-title">${paper.title}</div>
         <div class="paper-info">20 Questions &bull; Mixed Topics</div>
         ${scoreHtml}
-        <div style="margin-top:14px">
-          <span style="display:inline-block;padding:7px 22px;border-radius:8px;background:var(--accent);color:#fff;font-size:0.9rem;font-weight:600;">
+        <div class="paper-card-action">
+          <span class="paper-card-button">
             ${saved ? '↺ Retry' : '▶ Start'}
           </span>
         </div>
@@ -616,15 +648,16 @@ function showResults() {
   const gradeCss = getGradeClass(grade);
   
   // Score card
+  const netScoreClass = result.totalScore >= 0 ? 'positive-score' : 'negative-score';
   document.getElementById('score-card-area').innerHTML = `
     <div class="score-card">
       <div class="score-circle ${gradeCss}">
         <div class="pct">${result.pct}%</div>
         <div class="pct-label">Score</div>
       </div>
-      <div class="grade-label" style="color:var(--text)">${grade}</div>
+      <div class="grade-label">${grade}</div>
       <div class="grade-desc">${getGradeDescription(grade)}</div>
-      
+
       <div class="score-stats">
         <div class="stat-item stat-correct">
           <div class="stat-num">${result.totalCorrect}</div>
@@ -639,11 +672,11 @@ function showResults() {
           <div class="stat-label">— Skipped</div>
         </div>
         <div class="stat-item stat-score">
-          <div class="stat-num" style="color:${result.totalScore >= 0 ? 'var(--success)' : 'var(--danger)'}">${result.totalScore > 0 ? '+' : ''}${result.totalScore}</div>
+          <div class="stat-num ${netScoreClass}">${result.totalScore > 0 ? '+' : ''}${result.totalScore}</div>
           <div class="stat-label">Net Score</div>
         </div>
         <div class="stat-item">
-          <div class="stat-num" style="color:#888">${result.totalPossible}</div>
+          <div class="stat-num neutral-score">${result.totalPossible}</div>
           <div class="stat-label">Total Marks</div>
         </div>
       </div>
@@ -651,11 +684,11 @@ function showResults() {
   
   // Review section
   let reviewHtml = '<div class="review-section"><h3>📝 Detailed Review</h3>';
-  
+
   result.qResults.forEach(({ q, qScore, qPossible, qDetails }, idx) => {
     const scoreClass = qScore > 0 ? 'pos' : (qScore < 0 ? 'neg' : 'zero');
     const scoreText = qScore > 0 ? `+${qScore}/${qPossible}` : `${qScore}/${qPossible}`;
-    
+
     reviewHtml += `
       <div class="review-question">
         <div class="rq-header">
@@ -663,54 +696,55 @@ function showResults() {
           <div class="rq-text">${escHtml(q.question)}</div>
           <div class="rq-score ${scoreClass}">${scoreText}</div>
         </div>`;
-    
+
     if (q.answer.type === 'tf') {
-      reviewHtml += `<table class="review-tf" style="width:100%;font-size:0.88rem;">
-        <thead><tr style="background:#f5f5f5;font-weight:600;font-size:0.8rem">
-          <td style="padding:6px 10px">Opt</td>
-          <td style="padding:6px 10px">Statement</td>
-          <td style="padding:6px 10px;text-align:center">Your Ans</td>
-          <td style="padding:6px 10px;text-align:center">Correct</td>
-          <td style="padding:6px 10px;text-align:center">Result</td>
+      reviewHtml += `<table class="review-tf">
+        <thead><tr class="review-tf-header">
+          <td class="review-tf-cell">Opt</td>
+          <td class="review-tf-cell">Statement</td>
+          <td class="review-tf-cell review-tf-centered">Your Ans</td>
+          <td class="review-tf-cell review-tf-centered">Correct</td>
+          <td class="review-tf-cell review-tf-centered">Result</td>
         </tr></thead><tbody>`;
-      
+
       qDetails.forEach(d => {
         if (!d.letter) return;
         const rowClass = d.result === 'correct' ? 'correct-row' : (d.result === 'wrong' ? 'wrong-row' : 'unanswered-row');
         const icon = d.result === 'correct' ? '✓' : (d.result === 'wrong' ? '✗' : '—');
-        const iconColor = d.result === 'correct' ? 'var(--success)' : (d.result === 'wrong' ? 'var(--danger)' : '#888');
+        const iconColorClass = d.result === 'correct' ? 'icon-success' : (d.result === 'wrong' ? 'icon-danger' : 'icon-neutral');
         const correctLabel = d.correctAns ? (d.correctAns === 'T' ? 'True' : 'False') : '?';
         const userLabel = d.userAns ? (d.userAns === 'T' ? 'True' : 'False') : '—';
-        
+        const userColorClass = d.userAns ? (d.result==='correct' ? 'text-success' : 'text-danger') : 'text-neutral';
+
         reviewHtml += `<tr class="${rowClass}">
-          <td style="padding:6px 10px;font-weight:700;color:var(--accent)">${d.letter})</td>
-          <td class="opt-text" style="padding:6px 10px">${escHtml(d.text)}</td>
-          <td class="your-ans" style="padding:6px 10px;text-align:center;color:${d.userAns ? (d.result==='correct' ? 'var(--success)' : 'var(--danger)') : '#888'}">${userLabel}</td>
-          <td class="correct-ans" style="padding:6px 10px;text-align:center;color:var(--success)">${correctLabel}</td>
-          <td class="result-icon" style="padding:6px 10px;text-align:center;font-weight:700;color:${iconColor}">${icon}</td>
+          <td class="review-tf-cell review-tf-opt">${d.letter})</td>
+          <td class="review-tf-cell review-tf-text">${escHtml(d.text)}</td>
+          <td class="review-tf-cell review-tf-centered your-ans ${userColorClass}">${userLabel}</td>
+          <td class="review-tf-cell review-tf-centered correct-ans text-success">${correctLabel}</td>
+          <td class="review-tf-cell review-tf-centered result-icon ${iconColorClass}">${icon}</td>
         </tr>`;
       });
-      
+
       reviewHtml += '</tbody></table>';
     } else {
       // Single answer review
       const opts = Object.entries(q.options);
-      reviewHtml += '<div style="display:flex;flex-direction:column;gap:6px;margin-top:8px">';
+      reviewHtml += '<div class="review-item">';
       opts.forEach(([letter, text]) => {
         const letterUpper = letter.toUpperCase();
         const isCorrect = q.answer.answer === letterUpper;
         const isUserAnswer = qDetails[0] && qDetails[0].userAns === letterUpper;
-        let style = 'background:#f8f9fa;border:1px solid #eee;';
+        let optionClass = 'review-item-option';
         let marker = '';
-        if (isCorrect) { style = 'background:#e8f5e9;border:1px solid #a5d6a7;'; marker = ' ✓'; }
-        if (isUserAnswer && !isCorrect) { style = 'background:#fce4ec;border:1px solid #f48fb1;'; marker = ' ✗'; }
-        reviewHtml += `<div style="${style}border-radius:8px;padding:8px 14px;font-size:0.9rem;">
-          <strong style="color:var(--accent)">${letterUpper})</strong> ${escHtml(text)}<span style="font-weight:700">${marker}</span>
+        if (isCorrect) { optionClass += ' correct'; marker = ' ✓'; }
+        if (isUserAnswer && !isCorrect) { optionClass += ' wrong'; marker = ' ✗'; }
+        reviewHtml += `<div class="${optionClass}">
+          <strong style="color:var(--accent)">${letterUpper})</strong> ${escHtml(text)}<span class="review-item-marker">${marker}</span>
         </div>`;
       });
       reviewHtml += '</div>';
     }
-    
+
     reviewHtml += '</div>';
   });
   
