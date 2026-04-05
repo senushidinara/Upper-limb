@@ -561,10 +561,13 @@ function calculateScore() {
     qResults.push({ q, qScore, qPossible, qCorrect, qWrong, qDetails });
   });
   
-  // Percentage: normalize to 0-100
-  // Raw score can be negative; percentage = (score + possible) / (2 * possible) * 100
-  // But simpler: percentage = correct / total_possible * 100
-  const pct = totalPossible > 0 ? Math.round((totalCorrect / totalPossible) * 100) : 0;
+  // Percentage: normalize score range [-totalPossible, +totalPossible] to [0, 100]
+  // Formula: (score + totalPossible) / (2 * totalPossible) * 100
+  let pct = 0;
+  if (totalPossible > 0) {
+    const normalizedScore = (totalScore + totalPossible) / (2 * totalPossible);
+    pct = Math.round(Math.max(0, Math.min(100, normalizedScore * 100)));
+  }
   const adjustedScore = totalScore; // Can be negative
   
   return { totalScore, totalPossible, totalCorrect, totalWrong, totalSkipped, pct, qResults };
